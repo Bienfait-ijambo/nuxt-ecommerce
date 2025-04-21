@@ -14,27 +14,33 @@ const registerInput = ref({
   email: "ben@gmail.com",
   password: "",
 });
+const mail = useMail();
+
 const v$ = useVuelidate(rules, registerInput);
-const loading=ref(false)
+const loading = ref(false);
 
 async function submitInput() {
   const isValid = v$.value.$validate();
   if (!isValid) return;
 
- try{
-  loading.value=true
-  const res=await $fetch('/api/auth/register',{
-    method:'POST',
-    body:JSON.stringify(registerInput.value)
-  })
-  loading.value=false
+  try {
+    loading.value = true;
+    const res = await $fetch("/api/auth/register", {
+      method: "POST",
+      body: JSON.stringify(registerInput.value),
+    });
+    mail.send({
+      from: "John Doe",
+      subject: "Incredible",
+      text: "This is an incredible test message",
+    });
+    loading.value = false;
 
-  console.log(res)
- }catch(error){
-  loading.value=false
-  console.log('error :',error?.message)
- }
-  
+    console.log(res);
+  } catch (error) {
+    loading.value = false;
+    console.log("error :", error?.message);
+  }
 }
 </script>
 <template>

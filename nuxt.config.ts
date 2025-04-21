@@ -9,6 +9,22 @@ export default defineNuxtConfig({
       pathPrefix: false,
     },
   ],
+  mail: {
+    message: {
+      to: 'ijamboizuba20@gmail.com',
+    },
+    smtp: {
+      host: "sandbox.smtp.mailtrap.io",
+      port: 2525,
+      auth: {
+        user: "4b0b4fbeab98bf",
+        pass: "1b0802bdf386eb"
+      }
+    },
+    
+  },
+
+
   runtimeConfig: {
     //private: is accessible only on the server
     JWT_TOKEN_KEY: process.env.JWT_TOKEN_KEY,
@@ -17,9 +33,9 @@ export default defineNuxtConfig({
     public: {
       // public:is accessible on server and client
 
-    }
-
+    },
 
   },
-  modules: ['@nuxtjs/tailwindcss', "@prisma/nuxt", '@pinia/nuxt',]
+  
+  modules: ['@nuxtjs/tailwindcss', "@prisma/nuxt", '@pinia/nuxt', 'nuxt-mail']
 })

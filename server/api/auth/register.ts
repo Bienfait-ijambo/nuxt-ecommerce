@@ -21,6 +21,7 @@ export default  defineEventHandler(async(event) => {
             password:hashPwd
         }
     })
+ 
     
     return { message: 'User Created successfully',user };
   })
