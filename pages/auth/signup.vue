@@ -14,7 +14,6 @@ const registerInput = ref({
   email: "ben@gmail.com",
   password: "",
 });
-const mail = useMail();
 
 const v$ = useVuelidate(rules, registerInput);
 const loading = ref(false);
@@ -29,11 +28,7 @@ async function submitInput() {
       method: "POST",
       body: JSON.stringify(registerInput.value),
     });
-    mail.send({
-      from: "John Doe",
-      subject: "Incredible",
-      text: "This is an incredible test message",
-    });
+    
     loading.value = false;
 
     console.log(res);
@@ -59,7 +54,7 @@ async function submitInput() {
             />
           </FormError>
 
-          <FormError :errors="v$.email.$errors">
+          <FormError :errors="v$.password.$errors">
             <BaseInput
               v-model="registerInput.password"
               :type="'password'"

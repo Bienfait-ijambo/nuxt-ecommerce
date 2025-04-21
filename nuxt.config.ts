@@ -14,13 +14,14 @@ export default defineNuxtConfig({
       to: 'ijamboizuba20@gmail.com',
     },
     smtp: {
-      host: "sandbox.smtp.mailtrap.io",
-      port: 2525,
+      host: process.env.MAIL_HOST,
+      port: process.env.MAIL_PORT,
       auth: {
-        user: "4b0b4fbeab98bf",
-        pass: "1b0802bdf386eb"
+        user: process.env.MAIL_TRAP_USER,
+        pass: process.env.MAIL_TRAP_PASSWORD
       }
     },
+
     
   },
 
@@ -37,5 +38,6 @@ export default defineNuxtConfig({
 
   },
   
-  modules: ['@nuxtjs/tailwindcss', "@prisma/nuxt", '@pinia/nuxt', 'nuxt-mail']
+  modules: ['@nuxtjs/tailwindcss', "@prisma/nuxt", '@pinia/nuxt','nuxt-mail']
+  
 })
