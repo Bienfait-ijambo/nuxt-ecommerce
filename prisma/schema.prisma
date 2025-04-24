@@ -16,7 +16,6 @@ model User {
   isValidEmail Int
   otpCode String
   name  String?
-  
   password String
 }
 
