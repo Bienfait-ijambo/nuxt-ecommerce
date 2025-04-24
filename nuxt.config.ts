@@ -9,24 +9,22 @@ export default defineNuxtConfig({
       pathPrefix: false,
     },
   ],
-  mail: {
-    message: {
-      to: 'ijamboizuba20@gmail.com',
-    },
-    smtp: {
-      host: process.env.MAIL_HOST,
-      port: process.env.MAIL_PORT,
-      auth: {
-        user: process.env.MAIL_TRAP_USER,
-        pass: process.env.MAIL_TRAP_PASSWORD
-      }
-    },
+ 
 
-    
+  nodemailer: {
+    from: '"E-commerce app" <noreply@app.com>',
+    host: process.env.MAIL_HOST,
+    port: Number(process.env.MAIL_PORT),
+    secure: false,
+    auth: {
+      user: process.env.MAIL_TRAP_USER,
+      pass: process.env.MAIL_TRAP_PASSWORD
+    },
   },
 
 
   runtimeConfig: {
+
     //private: is accessible only on the server
     JWT_TOKEN_KEY: process.env.JWT_TOKEN_KEY,
     REFRESH_TOKEN_KEY: process.env.REFRESH_TOKEN_KEY,
@@ -38,6 +36,6 @@ export default defineNuxtConfig({
 
   },
   
-  modules: ['@nuxtjs/tailwindcss', "@prisma/nuxt", '@pinia/nuxt','nuxt-mail']
+  modules: ['@nuxtjs/tailwindcss', "@prisma/nuxt", '@pinia/nuxt','nuxt-nodemailer']
   
 })

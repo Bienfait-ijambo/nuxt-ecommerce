@@ -10,13 +10,16 @@ const rules = {
   email: { required, email }, // Matches state.firstName
   password: { required }, // Matches state.lastName
 };
-const registerInput = ref({
-  email: "ben@gmail.com",
-  password: "",
-});
+
+const signUpStore=useSignUpStore()
+const {registerInput}=storeToRefs(signUpStore)
 
 const v$ = useVuelidate(rules, registerInput);
 const loading = ref(false);
+const router=useRouter()
+
+
+
 
 async function submitInput() {
   const isValid = v$.value.$validate();
@@ -28,12 +31,15 @@ async function submitInput() {
       method: "POST",
       body: JSON.stringify(registerInput.value),
     });
-    
+
+   
     loading.value = false;
+    router.push('/auth/email-verification')
 
     console.log(res);
   } catch (error) {
     loading.value = false;
+    // console.log('Error:', error?.data);
     console.log("error :", error?.message);
   }
 }
