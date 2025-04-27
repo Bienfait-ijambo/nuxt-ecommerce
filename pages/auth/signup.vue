@@ -7,6 +7,7 @@ definePageMeta({
 });
 
 const rules = {
+  name:{required},
   email: { required, email }, // Matches state.firstName
   password: { required }, // Matches state.lastName
 };
@@ -39,8 +40,8 @@ async function submitInput() {
     console.log(res);
   } catch (error) {
     loading.value = false;
-    // console.log('Error:', error?.data);
-    console.log("error :", error?.message);
+    showLoginOrSignUpError(error)
+    
   }
 }
 </script>
@@ -51,7 +52,14 @@ async function submitInput() {
       <div class="w-[300px] mt-20">
         <div class="flex flex-col gap-2">
           <h1 class="text-2xl mb-3">Sign up</h1>
-          {{ registerInput }}
+          <FormError :errors="v$.name.$errors">
+            <BaseInput
+              v-model="registerInput.name"
+              :type="'text'"
+              :placeholder="''"
+            />
+          </FormError>
+        
           <FormError :errors="v$.email.$errors">
             <BaseInput
               v-model="registerInput.email"

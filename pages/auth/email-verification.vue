@@ -37,7 +37,8 @@ async function verifyEmail() {
 
     loading.value = false;
     successMsg(res?.message);
-    router.push("/auth/signin");
+    window.location.href='/auth/signin'
+    // router.push("/auth/signin");
 
     // console.log(res);
   } catch (error) {
@@ -53,8 +54,8 @@ async function verifyEmail() {
       <div></div>
       <div class="w- mt-20">
         <div class="flex flex-col gap-2">
-          {{ otpInput }}
-          {{ registerInput }}
+          <!-- {{ otpInput }}
+          {{ registerInput }} -->
           <h1 class="text-2xl mb-3">E-mail verification</h1>
           <v-otp-input
             ref="otpInput"

@@ -1,14 +1,14 @@
 import prisma from "~/utils/script.prisma";
 import { hashPassword } from "./modules/bcrypt";
-import { loginSchema } from "./modules/validateUser";
+import { signupSchema } from "./modules/validateUser";
 import { generateOTP } from "./modules/generateOtpCode";
 import { USER_EMAIL_TYPE } from "./modules/user.constant";
 import { sendEmailVerification } from "./modules/send-email-verification";
 export default defineEventHandler(async (event) => {
     
-    const { email, password } = await readBody(event)
+    const { email,name, password } = await readBody(event)
 
-    const result = loginSchema.safeParse({ email, password })
+    const result = signupSchema.safeParse({ email,name, password })
 
     if (!result.success) {
         throw createError({
@@ -34,6 +34,7 @@ export default defineEventHandler(async (event) => {
 
     const user = await prisma.user.create({
         data: {
+            name:name,
             email: email,
             isValidEmail:USER_EMAIL_TYPE.INVALID_EMAIL,
             otpCode:otpCode,
