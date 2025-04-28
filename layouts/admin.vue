@@ -9,6 +9,8 @@ import ProductIcon from '~/components/Icons/ProductIcon.vue';
 import UserIcon from '~/components/Icons/UserIcon.vue';
 
 
+const userCookie = useCookie('user', userCookieSettings);
+  
 const drawerOpen=ref(true)
 const showMenu=ref(false)
 

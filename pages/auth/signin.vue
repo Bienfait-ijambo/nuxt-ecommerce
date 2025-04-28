@@ -25,9 +25,7 @@ const v$ = useVuelidate(rules, loginInput);
 const loading=ref(false)
 const router=useRouter()
 
- const userCookie = useCookie('user', {
-    maxAge: 60 * 60 * 24 * 7, // 7 days
-  });
+ const userCookie = useCookie('user',userCookieSettings);
   
 
 async function submitInput() {
