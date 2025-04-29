@@ -24,5 +24,29 @@ model User {
 model Category {
   id    Int     @id @default(autoincrement())
   name String  @unique
+ products Product[]
+}
+
+
+
+
+model Product {
+  id         Int      @id @default(autoincrement())
+  name       String
+  color      String
+  price      String
+  categoryId Int
+  category   Category @relation(fields: [categoryId], references: [id])
+  images     Image[]
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+
+model Image {
+  id        Int       @id @default(autoincrement())
+  url       String
+  productId Int 
+  product   Product  @relation(fields: [productId], references: [id])
  
 }

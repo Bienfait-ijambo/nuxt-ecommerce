@@ -29,6 +29,7 @@ const props = defineProps(["loading","label"]);
       d="M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 00-8 8z"
     ></path>
   </svg>
+
   {{label}}
 </button>
 </template>

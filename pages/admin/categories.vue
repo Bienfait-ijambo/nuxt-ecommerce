@@ -3,24 +3,45 @@ definePageMeta({
   layout: "admin",
 });
 
-const showModal=ref(false)
+const showModal = ref(false);
 
-function toggleCategoryModal(){
-showModal.value=!showModal.value
+function toggleCategoryModal() {
+  showModal.value = !showModal.value;
 }
 
-const data=await useFetch('/api/admin/category/get-categories')
+const categoryStore=useCategoryStore()
+const {categoryInput,edit}=storeToRefs(categoryStore)
 
+// const {data,refresh:getCategories}=await useFetch("/api/admin/category/get-categories",{
+//   headers: {
+//       Accept: "application/json",
+//       // Authorization: `Bearer ${userData?.token}`,
+//     },
+// });
+
+
+const {data,getCategories}=await categoryStore.fetchCategories()
+
+
+
+
+function editCategory(category){
+  categoryInput.value=category
+  edit.value=true
+  toggleCategoryModal()
+}
 </script>
 <template>
   <div class="h-screen">
     <div class="flex justify-end mb-4 pt-4">
-        <BaseBtn label="create" @click="toggleCategoryModal"></BaseBtn>
- 
-      <CategoryModal :show="showModal" @toggleCategoryModal="toggleCategoryModal"></CategoryModal>
+      <BaseBtn label="create" @click="toggleCategoryModal"></BaseBtn>
+      <CategoryModal
+        :show="showModal"
+        @toggleCategoryModal="toggleCategoryModal"
+        @getCategories="getCategories"
+      ></CategoryModal>
     </div>
-<!-- {{ data }} -->
-{{ data?.data?.categories }}
-    <CategoryTable :categories="data?.data?.categories"></CategoryTable>
+  
+    <CategoryTable @editCategory="editCategory" :categories="data?.categories" ></CategoryTable>
   </div>
 </template>

@@ -1,19 +1,26 @@
 <script setup>
 const props = defineProps(["show"]);
-const emit=defineEmits(['toggleCategoryModal'])
+const emit=defineEmits(['toggleCategoryModal','getCategories'])
 
-const categoryInput = ref({ name: "" });
+const categoryStore=useCategoryStore()
+const {categoryInput,edit}=storeToRefs(categoryStore)
+
 const loading = ref(false);
 
 async function submitInput() {
   try {
     loading.value = true;
-    const res = await $fetch("/api/admin/category/create-category", {
+    const categoryEnpoint=edit.value ?
+     "/api/admin/category/update-category":
+    "/api/admin/category/create-category"
+    const res = await $fetch(categoryEnpoint, {
       method: "POST",
       body: JSON.stringify(categoryInput.value),
     });
 
     loading.value = false;
+    edit.value=false
+    emit('getCategories')
     successMsg(res?.message);
   } catch (error) {
     loading.value = false;
@@ -37,11 +44,12 @@ async function submitInput() {
 
     <template #footer>
        
-      <BaseBtn class="bg-gray-400" 
+      <BaseBtn class="bg-slate-400" 
       @click="emit('toggleCategoryModal')" 
       label="Close"></BaseBtn>
 
-      <BaseBtn :loading="loading" @click="submitInput" label="Save"></BaseBtn>
+      <BaseBtn :loading="loading" @click="submitInput" 
+      :label="edit?'Update':'Create'"></BaseBtn>
     </template>
   </BaseModal>
 </template>
