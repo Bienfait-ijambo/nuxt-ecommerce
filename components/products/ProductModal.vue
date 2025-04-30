@@ -10,12 +10,16 @@ const loading = ref(false);
 async function submitInput() {
   try {
     loading.value = true;
+    const {price,...othersInput}=productInput.value
     const productEnpoint=edit.value ?
      "/api/admin/product/update":
     "/api/admin/product/create"
     const res = await $fetch(productEnpoint, {
       method: "POST",
-      body: JSON.stringify(productInput.value),
+      body: JSON.stringify({
+        price:parseFloat(price),
+        ...othersInput
+      }),
     });
 
     loading.value = false;
@@ -34,7 +38,10 @@ async function submitInput() {
       <h1 class="text-2xl">Create product</h1>
     </template>
 
+ 
+
     <template #body>
+    {{ productInput }}
       <BaseInput
       class="mb-2"
         v-model="productInput.name"
@@ -52,6 +59,7 @@ async function submitInput() {
        class="mb-2"
         v-model="productInput.price"
         :type="'text'"
+        min="1"
         :placeholder="'Product Price'"
       />
       <select
@@ -59,7 +67,7 @@ async function submitInput() {
        v-model="productInput.categoryId">
         <option value="">Categories</option>
         <option v-for="category in categories" :key="category.id" 
-        :value="category.name">
+        :value="category.id">
         {{category.name}}
       </option>
       </select>

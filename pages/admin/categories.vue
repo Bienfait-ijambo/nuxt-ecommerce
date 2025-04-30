@@ -12,13 +12,6 @@ function toggleCategoryModal() {
 const categoryStore=useCategoryStore()
 const {categoryInput,edit}=storeToRefs(categoryStore)
 
-// const {data,refresh:getCategories}=await useFetch("/api/admin/category/get-categories",{
-//   headers: {
-//       Accept: "application/json",
-//       // Authorization: `Bearer ${userData?.token}`,
-//     },
-// });
-
 
 const {data,getCategories}=await categoryStore.fetchCategories()
 

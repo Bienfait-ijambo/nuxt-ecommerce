@@ -1,4 +1,5 @@
 <script setup>
+
 definePageMeta({
   layout: "admin",
 });
@@ -9,16 +10,14 @@ function toggleProductModal() {
   showModal.value = !showModal.value;
 }
 
-// const {data,refresh:getCategories}=await useFetch("/api/admin/category/get-categories",{
-//   headers: {
-//       Accept: "application/json",
-//       // Authorization: `Bearer ${userData?.token}`,
-//     },
-// });
 
 
 const productStore=useProductStore()
 const {productInput,edit}=storeToRefs(productStore)
+
+const categoryStore=useCategoryStore()
+const {data,getCategories}=await categoryStore.fetchCategories()
+const {data:productData,getProducts}=await productStore.fetchProducts()
 
 
 function editProduct(product){
@@ -26,19 +25,23 @@ function editProduct(product){
   edit.value=true
   toggleProductModal()
 }
+
+
 </script>
 <template>
   <div class="h-screen">
     <div class="flex justify-end mb-4 pt-4">
-      <BaseBtn label="create" @click="toggleProductModal"></BaseBtn>
-      
+   
       <ProductModal
-    
+   :categories="data?.categories"
         :show="showModal"
         @toggleProductModal="toggleProductModal"
       ></ProductModal>
     </div>
-  
-    <!-- <CategoryTable @editCategory="editCategory" :categories="data?.categories" ></CategoryTable> -->
+    <ProductTable :products="productData?.products" > 
+      <template #btn>
+        <BaseBtn label="create" @click="toggleProductModal"></BaseBtn>
+      </template>
+    </ProductTable>
   </div>
 </template>

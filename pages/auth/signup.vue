@@ -37,7 +37,6 @@ async function submitInput() {
     loading.value = false;
     router.push('/auth/email-verification')
 
-    console.log(res);
   } catch (error) {
     loading.value = false;
     showLoginOrSignUpError(error)

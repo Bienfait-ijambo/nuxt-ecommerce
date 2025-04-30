@@ -22,7 +22,7 @@ export default defineEventHandler(async (event) => {
             name:name,
             color:color,
             categoryId:categoryId,
-            price:price
+            price:price.toString()
            
         }
     })

@@ -15,10 +15,9 @@ async function fetchCategories(){
             // Authorization: `Bearer ${userData?.token}`,
           },
       });
-      return{
-        data,getCategories
-      }
+      return{data,getCategories}
+  
 
 }
-    return { categoryInput,edit ,fetchCategories}
+    return { categoryInput,edit,fetchCategories }
   })

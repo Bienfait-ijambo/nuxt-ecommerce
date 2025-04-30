@@ -7,7 +7,7 @@ definePageMeta({
 </script>
 <template>
     <div class="bg-slate-200 h-screen">
-   dashboard
+   Dashboard
    <!-- <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
             <div class="bg-white p-4 rounded-2xl shadow-md">
               <h2 class="text-xl font-semibold">Earnings</h2>
