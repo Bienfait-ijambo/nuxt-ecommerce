@@ -1,5 +1,5 @@
 <script setup>
-const props = defineProps(["products"]);
+const props = defineProps(["productData"]);
 
 const emit=defineEmits(['editProduct'])
 const productStore=useProductStore()
@@ -8,7 +8,6 @@ const {search}=storeToRefs(productStore)
 
 
 const searchProduct=_debounce(async function(event){
-  console.log(event[0].target.value)
 search.value=event[0].target.value
 await productStore.fetchProducts()
 },1000)
@@ -42,7 +41,7 @@ await productStore.fetchProducts()
 
     <tbody>
 
-      <tr class=" text-left" v-for="(product,index) in products" :key="product.id">
+      <tr class=" text-left" v-for="(product,index) in productData?.products" :key="product.id">
         <td class="border border-gray-300 py-2 px-4">
           {{ index+1 }}
         </td>
@@ -56,4 +55,34 @@ await productStore.fetchProducts()
       
     </tbody>
   </table>
+
+
+  
+<div class="flex justify-between items-center mt-4">
+     
+     <div>
+       <button
+         class="px-4 py-2 bg-gray-200 rounded disabled:opacity-50"
+         :disabled="productData?.metadata?.page === 1"
+         @click="productStore.changePage(productData?.metadata?.page - 1)"
+       >
+         Prev
+       </button>
+
+       <span>Page {{ productData?.metadata?.page }} of {{ productData?.metadata?.totalPages }}</span>
+
+       <button
+         class="px-4 py-2 bg-gray-200 rounded disabled:opacity-50"
+         :disabled="productData?.metadata?.page === productData?.metadata?.totalPages"
+         @click="productStore.changePage(productData?.metadata?.page  + 1)"
+       >
+         Next
+       </button>
+     </div>
+     <div>
+     </div>
+      
+     </div>
+  
+
 </template>

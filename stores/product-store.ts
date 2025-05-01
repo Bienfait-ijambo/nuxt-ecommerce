@@ -4,23 +4,40 @@ export const useProductStore = defineStore('product-store', () => {
     const productInput = ref({ id: null, name: "", color: "", categoryId: null, price: 0 });
     const edit = ref(false)
     const search=ref("")
-
+    const productData=ref<any>(null)
+    const page=ref(1)
+    const limit=ref(10)
+   
     async function fetchProducts() {
 
-        const { data} = await useFetch("/api/admin/product/get", {
+        const {data,refresh} = await useFetch("/api/admin/product/get", {
             headers: {
                 Accept: "application/json",
                 // Authorization: `Bearer ${userData?.token}`,
             },
           
             query:{
-                search:search.value
+                search:search.value,
+                page:page.value,
+                limit:limit.value
             }
         });
-        return { data }
+      
+       productData.value=data.value
+       limit.value=productData.value?.metadata.limit
+       page.value=productData.value?.metadata.page
 
+     
+      
 
     }
 
-    return { productInput,search, edit,fetchProducts }
+
+
+    async function changePage(newPage:number){
+        page.value=newPage
+        await fetchProducts()
+    }
+   
+    return { productInput,search, productData,edit,fetchProducts,changePage }
 })

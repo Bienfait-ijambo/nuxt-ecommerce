@@ -1,5 +1,4 @@
 <script setup>
-
 definePageMeta({
   layout: "admin",
 });
@@ -10,35 +9,31 @@ function toggleProductModal() {
   showModal.value = !showModal.value;
 }
 
+const productStore = useProductStore();
+const { productInput, edit, productData } = storeToRefs(productStore);
 
+const categoryStore = useCategoryStore();
+const { data, getCategories } = await categoryStore.fetchCategories();
+// const {getProducts}=
+await productStore.fetchProducts();
 
-const productStore=useProductStore()
-const {productInput,edit}=storeToRefs(productStore)
-
-const categoryStore=useCategoryStore()
-const {data,getCategories}=await categoryStore.fetchCategories()
-const {data:productData,getProducts}=await productStore.fetchProducts()
-
-
-function editProduct(product){
-  productInput.value=product
-  edit.value=true
-  toggleProductModal()
+function editProduct(product) {
+  productInput.value = product;
+  edit.value = true;
+  toggleProductModal();
 }
-
-
 </script>
 <template>
   <div class="h-screen">
     <div class="flex justify-end mb-4 pt-4">
-   
       <ProductModal
-   :categories="data?.categories"
+        :categories="data?.categories"
         :show="showModal"
         @toggleProductModal="toggleProductModal"
       ></ProductModal>
     </div>
-    <ProductTable :products="productData?.products" > 
+  
+    <ProductTable :products="productData">
       <template #btn>
         <BaseBtn label="create" @click="toggleProductModal"></BaseBtn>
       </template>
