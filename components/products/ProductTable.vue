@@ -1,7 +1,7 @@
 <script setup>
 const props = defineProps(["productData"]);
 
-const emit=defineEmits(['editProduct'])
+const emit=defineEmits(['editProduct','deleteProduct'])
 const productStore=useProductStore()
 const {search}=storeToRefs(productStore)
 
@@ -50,7 +50,24 @@ await productStore.fetchProducts()
         <td class="border border-gray-300 py-2 px-4">{{product?.color}}</td>
         <td class="border border-gray-300 py-2 px-4">{{product?.price}} $</td>
 
-        <td class="border border-gray-300 py-2 px-4">Action</td>
+        <td class="flex border border-gray-300 py-2 px-4">
+          <button
+            @click="emit('editProduct',product)"
+            class="flex justify-center hover:bg-slate-200 text-gray-900 font-bold py-2 px-4 rounded flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+            :disabled="loading"
+          >
+            <EditIcon />
+
+          </button>
+          <button
+            @click="emit('deleteProduct',product)"
+            class="flex justify-center hover:bg-slate-200 text-gray-900 font-bold py-2 px-4 rounded flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+            :disabled="loading"
+          >
+            <TrashIcon />
+
+          </button>
+        </td>
       </tr>
       
     </tbody>

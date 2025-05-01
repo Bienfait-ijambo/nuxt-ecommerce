@@ -21,6 +21,7 @@ async function submitInput() {
         ...othersInput
       }),
     });
+    productInput.value={}
 
     loading.value = false;
     edit.value=false
@@ -41,7 +42,7 @@ async function submitInput() {
  
 
     <template #body>
-    {{ productInput }}
+  
       <BaseInput
       class="mb-2"
         v-model="productInput.name"

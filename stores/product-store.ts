@@ -7,6 +7,9 @@ export const useProductStore = defineStore('product-store', () => {
     const productData=ref<any>(null)
     const page=ref(1)
     const limit=ref(10)
+
+
+
    
     async function fetchProducts() {
 
@@ -33,11 +36,29 @@ export const useProductStore = defineStore('product-store', () => {
     }
 
 
+    async function deleteProduct(id:number) {
+
+        const res=await $fetch("/api/admin/product/delete", {
+            headers: {
+                Accept: "application/json",
+                // Authorization: `Bearer ${userData?.token}`,
+            },
+            method:'DELETE',
+            body:JSON.stringify({id:id})
+
+        });
+        successMsg(res?.message)
+ 
+
+    }
+
+
+
 
     async function changePage(newPage:number){
         page.value=newPage
         await fetchProducts()
     }
    
-    return { productInput,search, productData,edit,fetchProducts,changePage }
+    return { productInput,search, productData,edit,fetchProducts,changePage,deleteProduct }
 })
