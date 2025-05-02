@@ -59,6 +59,35 @@ export const useProductStore = defineStore('product-store', () => {
         page.value=newPage
         await fetchProducts()
     }
+
+
+
+function uploadImagePayload(productId:number,image:string){
+    return new Promise((resolve,reject)=>{
+       try {
+        const myHeaders = new Headers();
+        myHeaders.append("Accept", "application/json");
+        myHeaders.append("Content-Type", "application/json");
+
+        const formData=new FormData()
+        formData.append('productId',productId.toString())
+        formData.append('image',image)
+
+        // myHeaders.append("Authorization", "Bearer ff");
+        
+    
+        const requestOptions = {
+          method: "POST",
+          headers: myHeaders,
+          body: formData,
+        };
+        resolve(requestOptions)
+        
+       } catch (error) {
+       reject(error)
+       }
+    })
+}
    
-    return { productInput,search, productData,edit,fetchProducts,changePage,deleteProduct }
+    return { productInput,search, uploadImagePayload,productData,edit,fetchProducts,changePage,deleteProduct }
 })

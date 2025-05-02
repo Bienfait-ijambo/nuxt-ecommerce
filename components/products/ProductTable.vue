@@ -1,7 +1,7 @@
 <script setup>
 const props = defineProps(["productData"]);
 
-const emit=defineEmits(['editProduct','deleteProduct'])
+const emit=defineEmits(['editProduct','deleteProduct','uploadImage'])
 const productStore=useProductStore()
 const {search}=storeToRefs(productStore)
 
@@ -65,6 +65,15 @@ await productStore.fetchProducts()
             :disabled="loading"
           >
             <TrashIcon />
+
+          </button>
+
+          <button
+            @click="emit('uploadImage',product)"
+            class="flex justify-center hover:bg-slate-200 text-gray-900 font-bold py-2 px-4 rounded flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+            :disabled="loading"
+          >
+            <ImageIcon />
 
           </button>
         </td>
