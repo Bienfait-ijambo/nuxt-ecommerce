@@ -1,7 +1,7 @@
 <script setup>
 const props = defineProps(["productData"]);
 
-const emit=defineEmits(['editProduct','deleteProduct','uploadImage'])
+const emit=defineEmits(['editProduct','deleteProduct','uploadImage','showUploadedImages'])
 const productStore=useProductStore()
 const {search}=storeToRefs(productStore)
 
@@ -30,6 +30,7 @@ await productStore.fetchProducts()
     <thead>
       <tr class="bg-gray-100 text-left" >
         <td class="border border-gray-300 py-2 px-4">#</td>
+        
         <td class="border border-gray-300 py-2 px-4">Name</td>
         <td class="border border-gray-300 py-2 px-4">Category</td>
         <td class="border border-gray-300 py-2 px-4">Color</td>
@@ -45,6 +46,7 @@ await productStore.fetchProducts()
         <td class="border border-gray-300 py-2 px-4">
           {{ index+1 }}
         </td>
+        
         <td  class="border border-gray-300 py-2 px-4">{{product?.name}}</td>
         <td class="border border-gray-300 py-2 px-4">{{product?.category?.name}}</td>
         <td class="border border-gray-300 py-2 px-4">{{product?.color}}</td>
@@ -74,6 +76,15 @@ await productStore.fetchProducts()
             :disabled="loading"
           >
             <ImageIcon />
+
+          </button>
+
+          <button
+            @click="emit('showUploadedImages',product)"
+            class="flex justify-center hover:bg-slate-200 text-gray-900 font-bold py-2 px-4 rounded flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+            :disabled="loading"
+          >
+            <EyeIcon />
 
           </button>
         </td>

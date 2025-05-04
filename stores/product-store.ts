@@ -8,6 +8,11 @@ export const useProductStore = defineStore('product-store', () => {
     const page=ref(1)
     const limit=ref(10)
 
+    const productId=ref(null)
+    const showUploadImageModal=ref(false)
+    const showUploadedImageModal=ref(false)
+const uploadProductImages=ref([])
+
 
 
    
@@ -60,34 +65,31 @@ export const useProductStore = defineStore('product-store', () => {
         await fetchProducts()
     }
 
+    function uploadImagePayload(productId:number,file:string){
+        return new Promise((resolve,reject)=>{
+            try {
+                const formData = new FormData();
+
+            formData.append("Authorization", "Bearer ff");
+            formData.append("file", file);
+            formData.append("productId", productId.toString());
 
 
-function uploadImagePayload(productId:number,image:string){
-    return new Promise((resolve,reject)=>{
-       try {
-        const myHeaders = new Headers();
-        myHeaders.append("Accept", "application/json");
-        myHeaders.append("Content-Type", "application/json");
+            const requestOptions = {
+              method: "POST",
+              body: formData,
+            };
+            resolve(requestOptions)
+            
+                
+            } catch (error) {
+                reject(error)
+            }
+        })
+    }
 
-        const formData=new FormData()
-        formData.append('productId',productId.toString())
-        formData.append('image',image)
 
-        // myHeaders.append("Authorization", "Bearer ff");
-        
-    
-        const requestOptions = {
-          method: "POST",
-          headers: myHeaders,
-          body: formData,
-        };
-        resolve(requestOptions)
-        
-       } catch (error) {
-       reject(error)
-       }
-    })
-}
+
    
-    return { productInput,search, uploadImagePayload,productData,edit,fetchProducts,changePage,deleteProduct }
+    return { productId,uploadProductImages,showUploadedImageModal,showUploadImageModal,uploadImagePayload,productInput,search, productData,edit,fetchProducts,changePage,deleteProduct }
 })
