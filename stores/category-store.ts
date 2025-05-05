@@ -3,16 +3,14 @@ import { defineStore } from "pinia";
 export const useCategoryStore = defineStore('category-store', () => {
     const categoryInput = ref({id:null, name: "" });
     const edit=ref(false)
-    // if value true
-        // edit
-    // else
-        // create
+        const headers = useHeaders()
+
+
 async function fetchCategories(){
     
     const {data,refresh:getCategories}=await useFetch("/api/admin/category/get-categories",{
         headers: {
-            Accept: "application/json",
-            // Authorization: `Bearer ${userData?.token}`,
+           ...headers
           },
       });
       return{data,getCategories}

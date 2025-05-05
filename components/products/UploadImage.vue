@@ -17,6 +17,7 @@ function selectImage(event) {
   image.value = selectedImage;
 }
 
+
 async function uploadImage() {
   try {
     if (image.value !== null) {

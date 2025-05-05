@@ -12,6 +12,8 @@ export const useProductStore = defineStore('product-store', () => {
     const showUploadImageModal=ref(false)
     const showUploadedImageModal=ref(false)
 const uploadProductImages=ref([])
+const headers = useHeaders()
+
 
 
 
@@ -20,8 +22,7 @@ const uploadProductImages=ref([])
 
         const {data,refresh} = await useFetch("/api/admin/product/get", {
             headers: {
-                Accept: "application/json",
-                // Authorization: `Bearer ${userData?.token}`,
+              ...headers
             },
           
             query:{
@@ -45,8 +46,7 @@ const uploadProductImages=ref([])
 
         const res=await $fetch("/api/admin/product/delete", {
             headers: {
-                Accept: "application/json",
-                // Authorization: `Bearer ${userData?.token}`,
+               ...headers
             },
             method:'DELETE',
             body:JSON.stringify({id:id})
@@ -66,11 +66,12 @@ const uploadProductImages=ref([])
     }
 
     function uploadImagePayload(productId:number,file:string){
+
         return new Promise((resolve,reject)=>{
             try {
                 const formData = new FormData();
 
-            formData.append("Authorization", "Bearer ff");
+            formData.append("Authorization", headers?.Authorization);
             formData.append("file", file);
             formData.append("productId", productId.toString());
 

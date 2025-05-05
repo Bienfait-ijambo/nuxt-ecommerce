@@ -1,13 +1,29 @@
-
 <script setup>
-
 definePageMeta({
-    layout:'admin'
-})
+  layout: "admin",
+});
+
+const showModal = ref(false);
+
+const userStore = useUserStore()
+const {
+    userData,
+} = storeToRefs(userStore);
+
+
+
+await userStore.fetchUsers();
+
+
 </script>
 <template>
-    <div class="bg-slate-200 h-screen">
-   users
+  <div class="h-screen">
+    <div class="flex justify-end mb-4 pt-4">
+     
     </div>
-  </template>
-  
+
+    <UserTable :userData="userData"/>
+     
+   
+  </div>
+</template>
