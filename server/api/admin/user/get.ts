@@ -1,5 +1,6 @@
 import prisma from "~/utils/script.prisma";
 import { verifyToken } from "../../auth/modules/jwtToken";
+import { withAuth } from "~/utils/withAuth";
 export default withAuth(async (event) => {
 
 

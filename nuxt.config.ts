@@ -51,6 +51,7 @@ export default defineNuxtConfig({
   //     'postcss-custom-media': {}
   //   }
   // },
+  tailwindcss: { exposeConfig: true },
   modules: [
     '@nuxtjs/tailwindcss',
     "@prisma/nuxt",
