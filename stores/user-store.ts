@@ -8,6 +8,7 @@ export const useUserStore = defineStore('user-store', () => {
     const limit = ref(10)
 
     const headers = useHeaders()
+    const userError=ref<any>(null)
 
 
 
@@ -26,6 +27,9 @@ export const useUserStore = defineStore('user-store', () => {
             }
         });
         // console.log(error.value?.statusCode)
+        userError.value=error
+      
+    
 
         userData.value = data.value
         limit.value = userData.value?.metadata?.limit
@@ -49,5 +53,5 @@ export const useUserStore = defineStore('user-store', () => {
 
 
 
-    return { changePage, fetchUsers, userData, search }
+    return { changePage, userError,fetchUsers, userData, search }
 })

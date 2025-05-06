@@ -35,7 +35,29 @@ export default defineNuxtConfig({
     },
 
   },
-  
-  modules: ['@nuxtjs/tailwindcss', "@prisma/nuxt", '@pinia/nuxt','nuxt-nodemailer']
+  image: {
+    // Options
+  },
+  // icon: {
+  //   mode: 'css',
+  //   cssLayer: 'base'
+  // },
+  // app: {
+  //   pageTransition: { name: 'page', mode: 'out-in' }
+  // },
+  // postcss: {
+  //   plugins: {
+  //     'postcss-nested': {},
+  //     'postcss-custom-media': {}
+  //   }
+  // },
+  modules: [
+    '@nuxtjs/tailwindcss',
+    "@prisma/nuxt",
+    '@pinia/nuxt',
+    'nuxt-nodemailer',
+    '@nuxt/image',
+    '@nuxt/icon'
+  ]
   
 })

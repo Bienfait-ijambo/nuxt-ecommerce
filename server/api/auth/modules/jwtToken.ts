@@ -42,7 +42,6 @@ export function signRefreshToken(userId: number) {
 
 
 
-
 export function verifyToken(accessToken: string) {
 
   return new Promise<{message:string}|any>((resolve) => {
@@ -58,3 +57,4 @@ export function verifyToken(accessToken: string) {
 
 
 }
+

@@ -20,3 +20,4 @@ export async function authGuard(event: H3Event) {
   }
 
 }
+
