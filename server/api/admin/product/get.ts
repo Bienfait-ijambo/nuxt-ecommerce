@@ -1,7 +1,8 @@
 import prisma from "~/utils/script.prisma";
+import { withAuth } from "~/utils/withAuth";
 
 
-export default defineEventHandler(async (event) => {
+export default withAuth(async (event) => {
 
     const query = getQuery(event)
     const search = query?.search as string

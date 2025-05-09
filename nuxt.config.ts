@@ -45,12 +45,7 @@ export default defineNuxtConfig({
   // app: {
   //   pageTransition: { name: 'page', mode: 'out-in' }
   // },
-  // postcss: {
-  //   plugins: {
-  //     'postcss-nested': {},
-  //     'postcss-custom-media': {}
-  //   }
-  // },
+  
   tailwindcss: { exposeConfig: true },
   modules: [
     '@nuxtjs/tailwindcss',

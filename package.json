@@ -17,6 +17,7 @@
     "@prisma/client": "^6.6.0",
     "@prisma/nuxt": "^0.3.0",
     "@tailwindcss/typography": "^0.5.16",
+    "@vueform/slider": "^2.1.10",
     "@vuelidate/core": "^2.0.3",
     "@vuelidate/validators": "^2.0.4",
     "bcrypt": "^5.1.1",

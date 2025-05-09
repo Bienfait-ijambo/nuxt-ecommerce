@@ -14,6 +14,10 @@ const userCookie = useCookie('user', userCookieSettings);
 const drawerOpen=ref(true)
 const showMenu=ref(false)
 
+const headers=useHeaders()
+
+
+
 const links=ref([
     {
         menu:"Dashboard",
@@ -45,10 +49,13 @@ const links=ref([
 function  toggleDrawer() {
         drawerOpen.value = !drawerOpen.value
       }
+
+      
 </script>
 <template>
     <div class="flex h-screen bg-gray-100">
       <!-- Sidebar Drawer -->
+    
       <aside
         :class="[
           'bg-white shadow-lg h-full transition-all duration-300 flex flex-col',

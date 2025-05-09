@@ -6,16 +6,12 @@ export const useUserStore = defineStore('user-store', () => {
     const userData = ref<any>(null)
     const page = ref(1)
     const limit = ref(10)
-
     const headers = useHeaders()
+
     const userError=ref<any>(null)
 
-
-
-
+   
     async function fetchUsers() {
-
-
         const { data, refresh,error } = await useFetch("/api/admin/user/get", {
             headers: {
                 ...headers
@@ -26,21 +22,15 @@ export const useUserStore = defineStore('user-store', () => {
                 limit: limit.value
             }
         });
-        // console.log(error.value?.statusCode)
+
         userError.value=error
-      
-    
+
 
         userData.value = data.value
         limit.value = userData.value?.metadata?.limit
         page.value = userData.value?.metadata?.page
 
-
-
-
     }
-
-
 
 
 
@@ -50,8 +40,7 @@ export const useUserStore = defineStore('user-store', () => {
         await fetchUsers()
     }
 
+    return { changePage,fetchUsers, userData, search,userError
 
-
-
-    return { changePage, userError,fetchUsers, userData, search }
+    }
 })

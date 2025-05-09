@@ -1,7 +1,8 @@
 import prisma from "~/utils/script.prisma";
 import { deleteProductSchema } from "./modules/validateProduct";
+import { withAuth } from "~/utils/withAuth";
 
-export default defineEventHandler(async (event) => {
+export default withAuth(async (event) => {
     
     const { id} = await readBody(event)
 

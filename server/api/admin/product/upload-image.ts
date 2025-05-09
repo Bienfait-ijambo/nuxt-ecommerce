@@ -5,6 +5,8 @@ import multer from 'multer'
 import path from 'path'
 import fs from 'fs'
 import prisma from "~/utils/script.prisma";
+import { withAuth } from '~/utils/withAuth';
+import { authGuard } from '~/middlewares/authGuard';
 
 // Setup multer disk storage
 const storage = multer.diskStorage({
@@ -77,7 +79,7 @@ export default defineEventHandler(async (event) => {
 
 
     const { imageUrl, productId } = await uploadProductImage(event);
-
+    await authGuard(event)
     await prisma.image.create({
         data: {
             url: imageUrl,

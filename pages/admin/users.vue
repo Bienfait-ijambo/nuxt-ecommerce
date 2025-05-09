@@ -11,11 +11,11 @@ const {
     userError
 } = storeToRefs(userStore);
 
+ const {$isAuthenticated}=useNuxtApp()
 
 
 await userStore.fetchUsers();
 
-const {$isAuthenticated}=useNuxtApp()
 
 </script>
 <template>

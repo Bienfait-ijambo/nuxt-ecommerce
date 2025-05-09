@@ -3,7 +3,7 @@ export default defineNuxtPlugin({
     parallel: true,
     async setup (nuxtApp) {
       // the next plugin will be executed immediately
-      nuxtApp.provide('isAuthenticated',(error:Ref<any>)=>{
+      nuxtApp.provide('isAuthenticated',(error:any)=>{
         const statusCode=error.value?.statusCode
         if(statusCode===401){
         window.location.href='/auth/signin'

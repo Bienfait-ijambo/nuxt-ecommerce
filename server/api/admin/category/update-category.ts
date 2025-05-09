@@ -1,7 +1,8 @@
 import prisma from "~/utils/script.prisma";
 import { categorySchema } from "./modules/validateCategory";
+import { withAuth } from "~/utils/withAuth";
 
-export default defineEventHandler(async (event) => {
+export default withAuth(async (event) => {
     
     const { name,id } = await readBody(event)
 
