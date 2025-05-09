@@ -3,7 +3,6 @@ import { verifyToken } from '~/server/api/auth/modules/jwtToken';
 
 export async function authGuard(event: H3Event) {
   const authHeader = getHeader(event, 'authorization');
-  console.log(authHeader)
 
   if (!authHeader || !authHeader.startsWith('Bearer ')) {
     throw createError({ statusCode: 401, statusMessage: 'Invalid token' });

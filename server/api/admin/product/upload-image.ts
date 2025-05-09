@@ -51,14 +51,17 @@ const upload = multer({
     ])
 
 
-function uploadProductImage(event: any) {
+ async function uploadProductImage(event: any) {
+   
+ 
+
     return new Promise<{ imageUrl: string, productId: number }>((resolve, reject) => {
         upload(event.req, event.res, async (err:any) => {
+            
             if (err) {
                 reject(err)
             }
-
-
+          
             const file = event.req.files?.['file']?.[0];
             const productId = Number(event.req.body?.productId);
 
@@ -67,6 +70,7 @@ function uploadProductImage(event: any) {
                 return;
             }
 
+          
             const imageUrl = `/uploads/${file.filename}`;
             resolve({ imageUrl, productId });
 
@@ -74,20 +78,19 @@ function uploadProductImage(event: any) {
     })
 }
 
-export default defineEventHandler(async (event) => {
-    // Use multer to process the file upload
-
-
-    const { imageUrl, productId } = await uploadProductImage(event);
-    await authGuard(event)
+export default withAuth(async (event) => {
+   
+    const { imageUrl, productId } = await uploadProductImage(event)
+    
     await prisma.image.create({
         data: {
             url: imageUrl,
             productId: productId,
-        },
-    });
+}})
+    
 
     return { message: 'Product image uploaded' };
+
 })
 
 

@@ -71,12 +71,15 @@ export const useProductStore = defineStore('product-store', () => {
             try {
                 const formData = new FormData();
 
-                formData.append("Authorization", headers?.Authorization);
+                // formData.append("Authorization", headers?.Authorization);
                 formData.append("file", file);
                 formData.append("productId", productId.toString());
 
 
                 const requestOptions = {
+                    headers: {
+                        'Authorization': headers?.Authorization, // ✅ this sets the header
+                      },
                     method: "POST",
                     body: formData,
                 };

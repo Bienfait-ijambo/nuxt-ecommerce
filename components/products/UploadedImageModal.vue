@@ -11,7 +11,7 @@ const{showUploadedImageModal,uploadProductImages}=storeToRefs(productStore)
     </template>
 
     <template #body>
-        <div class="flex gap-4">
+        <div class="flex flex-wrap gap-4" >
 
             <img v-for="image in uploadProductImages"
             :key="image.url"
