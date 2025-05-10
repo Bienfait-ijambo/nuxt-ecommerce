@@ -14,6 +14,8 @@ export const useProductStore = defineStore('product-store', () => {
     const uploadProductImages = ref([])
     const headers = useHeaders()
 
+    const productColors=ref(['red','black','white','green','blue','yellow','orange','gray'])
+
 
 
 
@@ -77,9 +79,9 @@ export const useProductStore = defineStore('product-store', () => {
 
 
                 const requestOptions = {
-                    headers: {
-                        'Authorization': headers?.Authorization, // ✅ this sets the header
-                      },
+                   headers:{
+                    ...headers
+                   },
                     method: "POST",
                     body: formData,
                 };
@@ -95,5 +97,5 @@ export const useProductStore = defineStore('product-store', () => {
 
 
 
-    return { productId, uploadProductImages, showUploadedImageModal, showUploadImageModal, uploadImagePayload, productInput, search, productData, edit, fetchProducts, changePage, deleteProduct }
+    return { productId, uploadProductImages, showUploadedImageModal, showUploadImageModal, uploadImagePayload, productInput, search, productData, edit, fetchProducts, productColors,changePage, deleteProduct }
 })

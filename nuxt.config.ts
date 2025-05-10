@@ -9,7 +9,7 @@ export default defineNuxtConfig({
       pathPrefix: false,
     },
   ],
- 
+
 
   nodemailer: {
     from: '"E-commerce app" <noreply@app.com>',
@@ -35,17 +35,21 @@ export default defineNuxtConfig({
     },
 
   },
+  pinia: {
+    storesDirs: ['./stores/**']
+  },
+  
   image: {
     // Options
   },
-  // icon: {
-  //   mode: 'css',
-  //   cssLayer: 'base'
-  // },
+  icon: {
+    mode: 'css',
+    cssLayer: 'base'
+  },
   // app: {
   //   pageTransition: { name: 'page', mode: 'out-in' }
   // },
-  
+
   tailwindcss: { exposeConfig: true },
   modules: [
     '@nuxtjs/tailwindcss',
@@ -55,5 +59,5 @@ export default defineNuxtConfig({
     '@nuxt/image',
     '@nuxt/icon'
   ]
-  
+
 })

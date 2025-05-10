@@ -6,7 +6,7 @@ import path from 'path'
 import fs from 'fs'
 import prisma from "~/utils/script.prisma";
 import { withAuth } from '~/utils/withAuth';
-import { authGuard } from '~/middlewares/authGuard';
+import { authGuard } from '~/middleware/authGuard';
 
 // Setup multer disk storage
 const storage = multer.diskStorage({

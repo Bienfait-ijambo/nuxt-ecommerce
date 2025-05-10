@@ -1,7 +1,7 @@
 <script setup>
 const props = defineProps(["show"]);
 const emit=defineEmits(['toggleCategoryModal','getCategories'])
-
+const headers = useHeaders()
 const categoryStore=useCategoryStore()
 const {categoryInput,edit}=storeToRefs(categoryStore)
 
@@ -16,6 +16,9 @@ async function submitInput() {
     const res = await $fetch(categoryEnpoint, {
       method: "POST",
       body: JSON.stringify(categoryInput.value),
+      headers: {
+                    ...headers
+                },
     });
 
     loading.value = false;

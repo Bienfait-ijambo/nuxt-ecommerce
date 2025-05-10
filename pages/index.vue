@@ -1,29 +1,7 @@
 <script setup lang="ts">
-// const { setProducts, updateProductList } = useProducts();
-// const route = useRoute();
-// const { storeSettings } = useAppConfig();
-// const { isQueryEmpty } = useHelpers();
 
-// const { data } = await useAsyncGql('getProducts');
-// const allProducts = data.value?.products?.nodes as Product[];
-// setProducts(allProducts);
 
-// onMounted(() => {
-//   if (!isQueryEmpty.value) updateProductList();
-// });
 
-// watch(
-//   () => route.query,
-//   () => {
-//     if (route.name !== 'products') return;
-//     updateProductList();
-//   },
-// );
-
-useHead({
-  title: `Products`,
-  meta: [{ name: 'description', content: 'Discover our products' }],
-});
 </script>
 
 <template>
@@ -32,7 +10,7 @@ useHead({
 
     <div class="w-full">
       <div class="flex items-center justify-between w-full gap-4 mt-8 md:gap-8">
-        <ProductResultCount />
+        <!-- <ProductResultCount /> -->
         <!-- <OrderByDropdown class="hidden md:inline-flex" v-if="storeSettings.showOrderByDropdown" /> -->
         <!-- <ShowFilterTrigger v-if="storeSettings.showFilters" class="md:hidden" /> -->
       </div>

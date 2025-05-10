@@ -1,7 +1,7 @@
 import prisma from "~/utils/script.prisma";
 import { productSchema } from "./modules/validateProduct";
 import { withAuth } from "~/utils/withAuth";
-
+import slugify from 'slugify'
 export default withAuth(async (event) => {
     
     const { id,name,color,categoryId,price } = await readBody(event)
@@ -24,6 +24,7 @@ export default withAuth(async (event) => {
         },
         data: {
             name:name,
+            slug:slugify(name),
             color:color,
             categoryId:categoryId,
             price:price.toString()
@@ -31,7 +32,5 @@ export default withAuth(async (event) => {
         }
     })
 
-
-
-    return { message: 'product updated successfully', product };
+    return { message: 'product updated successfully',product };
 })

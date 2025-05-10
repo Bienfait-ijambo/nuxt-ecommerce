@@ -1,17 +1,17 @@
-<script setup lang="ts">
-// const route = useRoute();
-// const { productsPerPage } = useHelpers();
-// const { products } = useProducts();
-// const page = ref(parseInt(route.params.pageNumber as string) || 1);
-// const productsToShow = computed(() => products.value.slice((page.value - 1) * productsPerPage, page.value * productsPerPage));
+<script setup >
+
+const productEcomStore=useProductEcomStore()
+const {productData}=storeToRefs(productEcomStore)
+await productEcomStore.fetchProducts()
+
 </script>
 
 <template>
   <Transition name="fade" mode="out-in">
     <!-- !!products.length -->
-    <section v-if="true" class="relative w-full">
+    <section  class="relative w-full">
       <TransitionGroup name="shrink" tag="div" mode="in-out" class="product-grid">
-        <ProductCard  />
+        <ProductCard :productData="productData" />
 
       </TransitionGroup>
       <!-- <Pagination /> -->

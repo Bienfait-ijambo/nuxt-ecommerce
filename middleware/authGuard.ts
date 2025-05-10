@@ -5,6 +5,7 @@ export async function authGuard(event: H3Event) {
   const authHeader = getHeader(event, 'authorization');
 
   if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    
     throw createError({ statusCode: 401, statusMessage: 'Invalid token' });
   }
 
@@ -14,6 +15,7 @@ export async function authGuard(event: H3Event) {
   const verifyTokenData = await verifyToken(token);
 
   if (verifyTokenData?.message === 'invalid_token') {
+   
     throw createError({ statusCode: 401, statusMessage: 'Unauthorized' });
   } else {
     (event.context as any).user = verifyTokenData;

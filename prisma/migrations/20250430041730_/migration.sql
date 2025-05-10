@@ -2,6 +2,7 @@
 CREATE TABLE "Product" (
     "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
+    "slug" TEXT NOT NULL,
     "color" TEXT NOT NULL,
     "price" TEXT NOT NULL,
     "categoryId" INTEGER NOT NULL,

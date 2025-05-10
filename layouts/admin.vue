@@ -50,6 +50,10 @@ function  toggleDrawer() {
         drawerOpen.value = !drawerOpen.value
       }
 
+      function logoutUser(){
+        userCookie.value=null
+        window.location.href='/auth/signin'
+      }
       
 </script>
 <template>
@@ -59,10 +63,10 @@ function  toggleDrawer() {
       <aside
         :class="[
           'bg-white shadow-lg h-full transition-all duration-300 flex flex-col',
-          drawerOpen ? 'w-64' : 'w-20',
+          drawerOpen ? 'w-59' : 'w-16',
         ]"
       >
-        <div class="flex items-center justify-between px-4 py-4 border-b">
+        <div class="flex items-center justify-between px-4 py-3 border-b">
           <span v-if="drawerOpen" class="text-xl font-bold">Dashboard</span>
           <button
             @click="toggleDrawer"
@@ -123,7 +127,7 @@ function  toggleDrawer() {
       <!-- Main Content -->
       <div class="flex-1 flex flex-col">
         <header
-          class="bg-white shadow px-6 py-4 flex items-center justify-between"
+          class="bg-white shadow px-6 py-3 flex items-center justify-between"
         >
           <h1 class="text-lg font-semibold">Welcome Back!</h1>
           <div class="relative" @click="showMenu = !showMenu">
@@ -147,8 +151,8 @@ function  toggleDrawer() {
                 </div>
                 <ul>
                  
-                  <li>
-                    <a href="#" class="block px-4 py-2 hover:bg-gray-100"
+                  <li @click="logoutUser">
+                    <a href="#" class="block text-red-500 px-4 py-2 hover:bg-gray-100"
                       >Logout</a
                     >
                   </li>

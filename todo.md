@@ -4,25 +4,35 @@ npx prisma migrate dev --name init
 
 TO DO LIST
 ----------
-- finish secure admin
-- fix error in upload-headers
-- redirect if token undefined
-- create middleware
-- logout
-- theme installation
-- upload-image : issue about withAuth
-- categoryModal
 
+npm i @tailwindcss/typography
+npm i @nuxt/icon
+npx nuxi@latest module add image
+npm i @vueform/slider
+
+- add colors array ['red','black','white','green','blue','yellow','orange','gray']
+- function to formatNumbersToDecimal:price
+- display product + pagination
+- single-product:page
+- you may also like
+- product Reviews
+- filters
+- shopping-cart
+
+function formatIntToCurrencyFormat(amount){
+    const formatted = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    }).format(amount);
+    return formatted
+}
 
 
 
 ----------------------------------------
 
 
-npm i @tailwindcss/typography
-npm i @nuxt/icon
-npx nuxi@latest module add image
-npm i @vueform/slider
+
 
 - ALICE MONGANE
 

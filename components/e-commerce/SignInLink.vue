@@ -1,35 +1,35 @@
 <script setup lang="ts">
 
-function useAuth(){
-    return{
-        viewer:null, avatar:null, isPending:false, wishlistLink:'/dk'
-    }
-}
-const { viewer, avatar, isPending, wishlistLink } = useAuth();
-const linkTitle = computed<string>(() => null|| 'Sign In');
+// function useAuth(){
+//     return{
+//         viewer:null, avatar:null, isPending:false, wishlistLink:'/dk'
+//     }
+// }
+// const { viewer, avatar, isPending, wishlistLink } = useAuth();
+const linkTitle = computed<string>(() => null || 'Sign In');
 </script>
 
 <template>
-  <NuxtLink to="/my-account" :title="linkTitle" class="hidden sm:inline-flex aspect-square items-center">
+  <NuxtLink to="/auth/signin" :title="linkTitle" class="hidden sm:inline-flex aspect-square items-center">
     <Transition name="pop-in" mode="out-in">
-      <span v-if="avatar" class="relative avatar">
+      <!-- <span  class="relative avatar">
         <img
-          :src="avatar"
+          :src="null"
           class="rounded-full transform scale-125 shadow-md overflow-hidden border border-white my-auto"
           width="22"
           height="22"
-          :alt="linkTitle" />
+          :alt="'link-title'" />
         <div class="account-dropdown">
-          <NuxtLink :to="wishlistLink" class="hover:bg-gray-100"><Icon name="ion:heart-outline" size="16" /><span>Wishlist</span></NuxtLink>
+          <NuxtLink :to="'/'" class="hover:bg-gray-100"><Icon name="ion:heart-outline" size="16" /><span>Wishlist</span></NuxtLink>
           <NuxtLink to="/my-account" class="hover:bg-gray-100"><Icon name="ion:person-outline" size="16" /><span>My Account</span></NuxtLink>
           <button class="text-red-600 hover:bg-red-50" >
-            <LoadingIcon v-if="isPending" size="16" />
+            <LoadingIcon v-if="true" size="16" />
             <Icon v-else name="ion:log-out-outline" size="16" />
             <span>Logout</span>
           </button>
         </div>
-      </span>
-      <Icon v-else name="ion:person-outline" size="22" class="border border-transparent" />
+      </span> -->
+      <Icon  name="ion:person-outline" size="22" class="border border-transparent" />
     </Transition>
   </NuxtLink>
 </template>
