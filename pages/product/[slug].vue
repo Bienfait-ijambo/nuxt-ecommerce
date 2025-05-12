@@ -1,7 +1,14 @@
-<script lang="ts" setup>
+<script  setup>
 
 const quantity=ref(1)
 const products=ref([])
+const route=useRoute()
+
+const productEcomStore=useProductEcomStore()
+const {fetchSingleProductData,singleProductData }=storeToRefs(productEcomStore)
+
+await productEcomStore.fetchSingleProductData(route.params?.slug)
+
 
 </script>
 
@@ -9,9 +16,11 @@ const products=ref([])
   <main class="container relative py-6 xl:max-w-7xl">
     <div >
       <Breadcrumb class="mb-6"/>
+    
 
       <div class="flex flex-col gap-10 md:flex-row md:justify-between lg:gap-24">
         <ProductImageGallery
+        :images="singleProductData?.products?.images"
           class="relative flex-1"
            />
         <!-- <NuxtImg v-else class="relative flex-1 skeleton" src="/images/placeholder.jpg" :alt="product?.name || 'Product'" /> -->
@@ -20,12 +29,12 @@ const products=ref([])
           <div class="flex justify-between mb-4">
             <div class="flex-1">
               <h1 class="flex flex-wrap items-center gap-2 mb-2 text-2xl font-sesmibold">
-                anme-here-admin
+                  {{singleProductData?.products?.name}}
                 <!-- <LazyWPAdminLink :link="`/wp-admin/post.php?post=${product.databaseId}&action=edit`">Edit</LazyWPAdminLink> -->
               </h1>
               <StarRating />
             </div>
-            <ProductPrice class="text-xl" :sale-price="'250 $'" :regular-price="'14 $'" />
+            <ProductPrice class="text-xl" :sale-price="singleProductData?.products?.price +'$'" :regular-price="'14 $'" />
           </div>
 
 

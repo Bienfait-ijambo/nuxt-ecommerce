@@ -8,15 +8,40 @@ export default defineEventHandler(async (event) => {
     const limit = parseInt(query?.limit as string) || 10
 
 
+    const filters = []
+
+
+    const categories = Array.isArray(query?.categories) ? query?.categories :
+        (query?.categories as string || '').split(',').map(Number).filter((i) => i > 0)
+
+    const colors = Array.isArray(query?.colors) ? query?.colors :
+        (query?.colors as string || '').split(',').filter((i) => i !== '')
+
+    const prices = Array.isArray(query?.prices) ? query?.prices :
+        (query?.prices as string || '').split(',').map(Number).filter((i) => i > 0)
+
+    if (categories.length > 0) {
+        filters.push({ categoryId: { in: categories } })
+    }
+    if (colors.length > 0) {
+        filters.push({ color: { in: colors } })
+    }
+    if (prices.length === 2) {
+        // filters.push({ price: { gte: prices[0].toString(), lte: prices[1].toString() } })
+        filters.push({ price: { gte: prices[0], lte: prices[1] } })
+
+    }
+
+  
+    // colors,categories,prices
     const [products, total] = await Promise.all([
 
         prisma.product.findMany({
-            where: search ? {
-                name: {
-                    contains: search,
-                    mode: 'insensitive'
-                }
-            } : {},
+            // select * from products where categories IN(1,2) or color IN("red","bue")
+            // or price between 12 and 13
+            where: filters.length > 0 ?
+                { AND: filters }
+                : {},
             orderBy: {
                 createdAt: 'desc'
             },

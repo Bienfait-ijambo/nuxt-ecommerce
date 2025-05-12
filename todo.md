@@ -1,14 +1,20 @@
-npx prisma migrate dev --name init
+npx prisma migrate dev --name init : Initial the migration
 
 
 
 TO DO LIST
 ----------
 
-npm i @tailwindcss/typography
-npm i @nuxt/icon
-npx nuxi@latest module add image
-npm i @vueform/slider
+- finish filters
+- single-product page
+- product review
+- shopping cart
+
+
+
+
+
+
 
 - add colors array ['red','black','white','green','blue','yellow','orange','gray']
 - function to formatNumbersToDecimal:price

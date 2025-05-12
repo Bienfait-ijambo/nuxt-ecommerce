@@ -1,26 +1,25 @@
-<script setup lang="ts">
-// const { getFilter, setFilter, isFiltersActive } = useFiltering();
+<script setup >
 
-// const { attribute } = defineProps({
-//   attribute: { type: Object, required: true },
-// });
+const props=defineProps(['colors'])
 
-const attribute=ref({terms:[{slug:"black",name:"black"},{slug:"red",name:"black"}
-    ,{slug:"green",name:"black"},{slug:"blue",name:"black"},{slug:"yellow",name:"black"}
-]})
-const selectedTerms = ref([]);
+
+const selectedColors = ref([]);
 const filterTitle = ref("Color");
 const isOpen = ref(true);
 
-// watch(isFiltersActive, () => {
-//   // uncheck all checkboxes when filters are cleared
-//   if (!isFiltersActive.value) selectedTerms.value = [];
-// });
+const emit=defineEmits(['fetchProducts'])
 
-// Update the URL when the checkbox is changed
-const checkboxChanged = () => {
-//   setFilter(attribute.slug, selectedTerms.value);
-console.log("hel")
+
+const checkboxChanged = (color) => {
+const colorExist = selectedColors.value.some((c) => c === color);
+  if (colorExist) {
+    const filteredArray = selectedColors.value.filter((c) => c !== color);
+    selectedColors.value = filteredArray;
+     emit('fetchProducts',selectedColors.value)
+  } else {
+    selectedColors.value.push(color);
+    emit('fetchProducts',selectedColors.value)
+  }
 };
 </script>
 
@@ -30,9 +29,9 @@ console.log("hel")
     <Icon name="ion:chevron-down-outline" class="transform" :class="isOpen ? 'rotate-180' : ''" />
   </div>
   <div v-show="isOpen" class="mt-3 mr-6 max-h-[240px] grid gap-1.5 swatches overflow-auto custom-scrollbar">
-    <div v-for="color in attribute.terms" :key="color.slug" :style="{ '--color': color.slug }" :title="color.name">
-      <input :id="color.slug" v-model="selectedTerms" class="hidden" type="checkbox" :value="color.slug" @change="checkboxChanged" />
-      <label :for="color.slug" class="cursor-pointer m-0"></label>
+    <div v-for="color in colors" :key="color" :style="{ '--color': color }" :title="color">
+      <input :id="color" class="hidden" type="checkbox" :value="color" @change="checkboxChanged(color)" />
+      <label :for="color" class="cursor-pointer m-0"></label>
     </div>
   </div>
 </template>

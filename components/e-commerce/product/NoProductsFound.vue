@@ -20,11 +20,11 @@ const clearAll = () => {
       </p>
       <div>
         <button
-          v-if="true"
+         
           class="bg-primary rounded-lg font-bold mt-8 text-center text-white text-sm w-full p-2 px-3 inline-block hover:bg-primary-dark"
-          :title="'Clear filter'"
+          title="'Clear filter'"
           aria-label="Clear all filters and search"
-          @click="clearAll"
+          
           >
           clear filter and search
         </button>

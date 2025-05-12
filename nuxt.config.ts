@@ -31,6 +31,7 @@ export default defineNuxtConfig({
     DATABASE_URL: process.env.DATABASE_URL,
     public: {
       // public:is accessible on server and client
+      FALL_BACK_IMG_URL:process.env.FALL_BACK_IMG_URL
 
     },
 

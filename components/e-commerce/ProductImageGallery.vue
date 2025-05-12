@@ -1,42 +1,8 @@
-<script setup lang="ts">
-// const { FALLBACK_IMG } = useHelpers();
+<script setup >
+const config=useRunTimeConfig()
+const FALL_BACK_IMG_URL=config?.public?.FALL_BACK_IMG_URL
 
-// const props = defineProps({
-//   mainImage: { type: Object, required: true },
-//   gallery: { type: Object, required: true },
-//   node: { type: Object as PropType<Product | Variation>, required: true },
-//   activeVariation: { type: Object, required: false },
-// });
-
-// const primaryImage = computed(() => ({
-//   sourceUrl: props.mainImage.sourceUrl || FALLBACK_IMG,
-//   title: props.mainImage.title,
-//   altText: props.mainImage.altText,
-//   databaseId: props.mainImage.databaseId,
-// }));
-
-// const imageToShow = ref(primaryImage.value);
-
-// const galleryImages = computed(() => {
-//   // Add the primary image to the start of the gallery and remove duplicates
-//   return [primaryImage.value, ...props.gallery.nodes].filter((img, index, self) => index === self.findIndex((t) => t?.databaseId === img?.databaseId));
-// });
-
-// const changeImage = (image: any) => {
-//   if (image) imageToShow.value = image;
-// };
-
-// watch(
-//   () => props.activeVariation,
-//   (newVal) => {
-//     if (newVal?.image) {
-//       const foundImage = galleryImages.value.find((img) => img.databaseId === newVal.image?.databaseId);
-//       if (foundImage) imageToShow.value = foundImage;
-//     }
-//   },
-// );
-
-// FALLBACK_IMG
+const props=defineProps(['images'])
 
 const imgWidth = 540;
 </script>
@@ -50,24 +16,24 @@ const imgWidth = 540;
       :height="imgWidth"
       alt="product-name"
       title="product-name"
-      src="http://localhost:3000/nike/fix-1.jpg"
+      :src="images.length >0 ?images[0] : FALL_BACK_IMG_URL"
       fetchpriority="high"
       placeholder
       placeholder-class="blur-xl" />
     <div  class="my-4 gallery-images">
       <NuxtImg
-       
+       v-for="image in images" :key="image?.id"
         class="cursor-pointer rounded-xl"
         :width="imgWidth"
         :height="imgWidth"
-        src="http://localhost:3000/nike/fix-1.jpg"
+        :src="image?.url || FALL_BACK_IMG_URL"
         alt="product-name"
         title="product-name"
         placeholder
         placeholder-class="blur-xl"
         loading="lazy"
         />
-        <!-- @click.native="changeImage(galleryImg)"  -->
+        
     </div>
   </div>
 </template>

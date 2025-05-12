@@ -1,30 +1,51 @@
-<script setup >
+<script setup lang="ts">
 
 
-
-// // Filter out the color attribute and the rest of the global product attributes
-// const attributesWithTerms = globalProductAttributes.map((attr) => ({ ...attr, terms: terms?.filter((term) => term.taxonomyName === attr.slug) }));
 const attributesWithTerms=ref([{slug:"pa_colour",name:"red"}])
 
 const categoryStore=useCategoryStore()
 const {data}=await categoryStore.fetchCategories()
+const productStore=useProductStore()
+const {productColors}=storeToRefs(productStore)
+
+const productEcomStore=useProductEcomStore()
+const {selectedCategories,selectedPrices,selectedColors}=storeToRefs(productEcomStore)
+
+
+async function fetchProductByCategories(categories:number[]){
+  selectedCategories.value=categories
+  await productEcomStore.fetchProducts(selectedCategories.value,selectedPrices.value,selectedColors.value)
+}
+async function fetchProductByColors(colors:string[]){
+  selectedColors.value=colors
+  await productEcomStore.fetchProducts(selectedCategories.value,selectedPrices.value,selectedColors.value)
+}
+
+async function fetchProductByPrice(prices:number[]){
+   selectedPrices.value=prices
+  await productEcomStore.fetchProducts(selectedCategories.value,selectedPrices.value,selectedColors.value)
+
+}
+
+
+
 </script>
 
 <template>
   <aside id="filters">
     <OrderByDropdown class="block w-full md:hidden" />
     <div class="relative z-30 grid mb-12 space-y-8 divide-y">
-      <PriceFilter />
-      <CategoryFilter :categories="data?.categories" />
+      <PriceFilter @fetchProducts="fetchProductByPrice" />
+      <CategoryFilter @fetchProducts="fetchProductByCategories" :categories="data?.categories" />
 
       <div v-for="attribute in attributesWithTerms" :key="attribute.slug">
-        <ColorFilter  />
+        <ColorFilter @fetchProducts="fetchProductByColors" :colors="productColors" />
         <!-- <GlobalFilter /> -->
       </div>
 
       <LazyStarRatingFilter  />
       <!-- <OnSaleFilter /> -->
-      <LazyResetFiltersButton v-if="true" />
+      <LazyResetFiltersButton  />
     </div>
   </aside>
   <!-- @click="removeBodyClass('show-filters')" -->

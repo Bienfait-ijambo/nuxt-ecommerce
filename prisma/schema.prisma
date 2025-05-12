@@ -30,12 +30,15 @@ model Category {
 
 
 
+
+
 model Product {
   id         Int      @id @default(autoincrement())
   name       String
   slug       String?
   color      String
-  price      String
+  // price      String
+  price       Decimal @db.Decimal(10,2)
   categoryId Int
   category   Category @relation(fields: [categoryId], references: [id])
   images     Image[]
