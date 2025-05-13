@@ -1,5 +1,5 @@
 <script setup >
-const config=useRunTimeConfig()
+const config=useRuntimeConfig()
 const FALL_BACK_IMG_URL=config?.public?.FALL_BACK_IMG_URL
 
 const props=defineProps(['images'])
@@ -16,7 +16,7 @@ const imgWidth = 540;
       :height="imgWidth"
       alt="product-name"
       title="product-name"
-      :src="images.length >0 ?images[0] : FALL_BACK_IMG_URL"
+      :src="images.length >0 ?images[0]?.url : FALL_BACK_IMG_URL"
       fetchpriority="high"
       placeholder
       placeholder-class="blur-xl" />

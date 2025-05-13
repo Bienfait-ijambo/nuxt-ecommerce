@@ -16,7 +16,6 @@ export const useProductStore = defineStore('product-store', () => {
 
     const productColors=ref(['red','black','white','green','blue','yellow','orange','gray'])
 
--e
 
 
 

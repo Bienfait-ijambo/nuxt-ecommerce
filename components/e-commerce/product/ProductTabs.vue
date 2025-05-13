@@ -1,11 +1,7 @@
 <script setup lang="ts">
-// const { product } = defineProps({
-//   product: { type: Object as PropType<Product>, required: true },
-// });
-// const { storeSettings } = useAppConfig();
 
-const initialTab =0
-const show = ref(initialTab);
+
+const show = ref(1);
 </script>
 
 <template>
@@ -14,9 +10,10 @@ const show = ref(initialTab);
       <button  type="button" :class="show === 1 ? 'active' : ''" @click.prevent="show = 1">Reviews (1)</button>
     </nav>
     <div class="tab-contents">
+    
       <!-- <div v-if="show === 0 && product.description" class="font-light mt-8 prose" v-html="product.description" /> -->
       <!-- s v-if="show === 1" :product="null" -->
-      <ProductReview />
+      <ProductReviews />
     </div>
   </div>
 </template>

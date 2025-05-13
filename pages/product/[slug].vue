@@ -1,13 +1,16 @@
 <script  setup>
 
 const quantity=ref(1)
-const products=ref([])
 const route=useRoute()
 
 const productEcomStore=useProductEcomStore()
-const {fetchSingleProductData,singleProductData }=storeToRefs(productEcomStore)
+const {fetchSingleProductData,singleProductData,sameCategoryProduct }=storeToRefs(productEcomStore)
+
+
 
 await productEcomStore.fetchSingleProductData(route.params?.slug)
+
+
 
 
 </script>
@@ -16,8 +19,6 @@ await productEcomStore.fetchSingleProductData(route.params?.slug)
   <main class="container relative py-6 xl:max-w-7xl">
     <div >
       <Breadcrumb class="mb-6"/>
-    
-
       <div class="flex flex-col gap-10 md:flex-row md:justify-between lg:gap-24">
         <ProductImageGallery
         :images="singleProductData?.products?.images"
@@ -96,7 +97,7 @@ await productEcomStore.fetchSingleProductData(route.params?.slug)
       </div>
       <div class="my-32">
         <div class="mb-4 text-xl font-semibold">You May Also Like</div>
-        <LazyProductRow :products="products" class="grid-cols-2 md:grid-cols-4 lg:grid-cols-5" />
+        <!-- <LazyProductRow :productData="sameCategoryProduct" class="grid-cols-2 md:grid-cols-4 lg:grid-cols-5" /> -->
       </div>
     </div>
   </main>
