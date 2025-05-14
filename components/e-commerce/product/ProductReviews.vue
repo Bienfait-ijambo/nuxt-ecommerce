@@ -5,7 +5,7 @@
 <template>
   <div class="flex flex-wrap gap-32 items-start">
     <div class="flex max-w-sm gap-4 prose">
-      <!-- <ReviewsScore v-if="product.reviews" :reviews="product.reviews" :productId="product.databaseId" /> -->
+      <ReviewsScore />
     </div>
     <div class="divide-y flex-1">
       <div  class="my-2 py-8">

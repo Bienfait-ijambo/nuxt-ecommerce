@@ -45,7 +45,8 @@ export default defineNuxtConfig({
   },
   icon: {
     mode: 'css',
-    cssLayer: 'base'
+    cssLayer: 'base',
+    
   },
   // app: {
   //   pageTransition: { name: 'page', mode: 'out-in' }
@@ -58,7 +59,8 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     'nuxt-nodemailer',
     '@nuxt/image',
-    '@nuxt/icon'
+    '@nuxt/icon',
+    '@unlok-co/nuxt-stripe'
   ]
 
 })

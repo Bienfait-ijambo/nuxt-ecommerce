@@ -5,26 +5,11 @@ npx prisma migrate dev --name init : Initial the migration
 TO DO LIST
 ----------
 
-- finish filters
-- single-product page
-- product review
-- shopping cart
-
-
-
-
-
-
-
-- add colors array ['red','black','white','green','blue','yellow','orange','gray']
-- function to formatNumbersToDecimal:price
-- display product + pagination
-- single-product:page
-- you may also like
+- display same category product
 - product Reviews
-- filters
+- finish star-rating
 - shopping-cart
-
+- payment
 function formatIntToCurrencyFormat(amount){
     const formatted = new Intl.NumberFormat('en-US', {
     style: 'currency',

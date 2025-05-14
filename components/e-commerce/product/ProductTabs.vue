@@ -11,8 +11,6 @@ const show = ref(1);
     </nav>
     <div class="tab-contents">
     
-      <!-- <div v-if="show === 0 && product.description" class="font-light mt-8 prose" v-html="product.description" /> -->
-      <!-- s v-if="show === 1" :product="null" -->
       <ProductReviews />
     </div>
   </div>
