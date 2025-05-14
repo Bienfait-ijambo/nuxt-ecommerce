@@ -44,6 +44,7 @@ export default defineEventHandler(async (event) => {
             user: { 
                 name: userExist?.name, 
                 email: userExist?.email, 
+                role : userExist?.role, 
                 id: userExist?.id 
             },
             isLoggedIn: true

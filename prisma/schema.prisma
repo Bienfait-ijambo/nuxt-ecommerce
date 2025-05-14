@@ -17,6 +17,10 @@ model User {
   otpCode String
   name  String?
   password String
+  role String?
+  reviews ProductReview[]
+
+
 }
 
 
@@ -42,10 +46,28 @@ model Product {
   categoryId Int
   category   Category @relation(fields: [categoryId], references: [id])
   images     Image[]
+  reviews     ProductReview[]
+
+  
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
 }
 
+
+model ProductReview {
+  id         Int      @id @default(autoincrement())
+  userId     Int
+  starNumber  Int
+  productId   Int
+  comment    String
+
+  user   User @relation(fields: [userId], references: [id])
+  product   Product @relation(fields: [productId], references: [id])
+
+  
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
 
 model Image {
   id        Int       @id @default(autoincrement())

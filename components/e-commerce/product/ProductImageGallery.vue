@@ -5,6 +5,13 @@ const FALL_BACK_IMG_URL=config?.public?.FALL_BACK_IMG_URL
 const props=defineProps(['images'])
 
 const imgWidth = 540;
+
+const mainImgUrl=ref(props.images.length >0 ?props.images[0]?.url : FALL_BACK_IMG_UR)
+
+function selectImage(imageUrl){
+
+  mainImgUrl.value=imageUrl
+}
 </script>
 
 <template>
@@ -16,7 +23,7 @@ const imgWidth = 540;
       :height="imgWidth"
       alt="product-name"
       title="product-name"
-      :src="images.length >0 ?images[0]?.url : FALL_BACK_IMG_URL"
+      :src="mainImgUrl"
       fetchpriority="high"
       placeholder
       placeholder-class="blur-xl" />
@@ -26,6 +33,7 @@ const imgWidth = 540;
         class="cursor-pointer rounded-xl"
         :width="imgWidth"
         :height="imgWidth"
+        @click="selectImage(image?.url)"
         :src="image?.url || FALL_BACK_IMG_URL"
         alt="product-name"
         title="product-name"

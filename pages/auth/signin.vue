@@ -35,8 +35,16 @@ async function submitInput() {
     });
 
     loading.value = false;
+    const userRole=res?.data?.user?.role
+    if(userRole==='CUSTOMER'){
+    userCookie.value = res;
+    router.push("/");
+    }else{
+      console.log(res)
     userCookie.value = res;
     router.push("/admin/dashboard");
+    }
+    
   } catch (error) {
     loading.value = false;
     showLoginOrSignUpError(error);

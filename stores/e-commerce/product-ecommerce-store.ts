@@ -65,10 +65,7 @@ export const useProductEcomStore = defineStore('product-Ecom-store', () => {
         });
 
         singleProductData.value = data.value
-        const categoryId = singleProductData.value?.products?.categoryId
-
-        // await fetchProductWithSameCategory(categoryId)
-
+       
 
 
     }

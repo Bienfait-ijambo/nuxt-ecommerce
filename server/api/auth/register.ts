@@ -2,7 +2,7 @@ import prisma from "~/utils/script.prisma";
 import { hashPassword } from "./modules/bcrypt";
 import { signupSchema } from "./modules/validateUser";
 import { generateOTP } from "./modules/generateOtpCode";
-import { USER_EMAIL_TYPE } from "./modules/user.constant";
+import { USER_EMAIL_TYPE,USER_ROLE } from "./modules/user.constant";
 import { sendEmailVerification } from "./modules/send-email-verification";
 export default defineEventHandler(async (event) => {
     
@@ -38,7 +38,8 @@ export default defineEventHandler(async (event) => {
             email: email,
             isValidEmail:USER_EMAIL_TYPE.INVALID_EMAIL,
             otpCode:otpCode,
-            password: hashPwd
+            password: hashPwd,
+            role:USER_ROLE.CUSTOMER
         }
     })
 

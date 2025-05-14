@@ -6,10 +6,17 @@ TO DO LIST
 ----------
 
 - display same category product
-- product Reviews
+- change image slelection
+- product Reviews (review table:id,customerId,starNumber,productId,comment)
+  
+ Note a customer can review a product only once
+
+
 - finish star-rating
 - shopping-cart
 - payment
+- select  current-image
+
 function formatIntToCurrencyFormat(amount){
     const formatted = new Intl.NumberFormat('en-US', {
     style: 'currency',
