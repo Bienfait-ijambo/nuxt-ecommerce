@@ -55,7 +55,7 @@ async function addComment(){
                   
               <label class="text-center text-sm block relative m-auto">How was your experience? <span class="text-red-500">*</span></label>
               <div class="gap-1 flex justify-center mt-2 relative">
-             
+           
                 <label
                   v-for="i in 5"
                   :key="i"

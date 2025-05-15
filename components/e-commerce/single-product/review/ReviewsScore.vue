@@ -71,7 +71,7 @@ console.log('add comment...')
    <!-- Review form -->
    <!-- Review form -->
 
-     <ReviewForm></ReviewForm>
+     <ReviewForm v-show="show"></ReviewForm>
     <!-- end Review form  -->
     <!-- end Review form  -->
     <!-- end Review form  -->

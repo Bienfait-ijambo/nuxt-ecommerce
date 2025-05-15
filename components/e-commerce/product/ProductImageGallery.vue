@@ -17,6 +17,8 @@ function selectImage(imageUrl){
 <template>
   <div>
     <!-- <SaleBadge :node class="absolute text-base top-4 right-4" /> -->
+     {{mainImgUrl}}
+      {{typeof mainImgUrl}}
     <NuxtImg
       class="rounded-xl object-contain w-full min-w-[350px]"
       :width="imgWidth"

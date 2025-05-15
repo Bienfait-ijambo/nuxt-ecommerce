@@ -11,7 +11,7 @@ defineProps({
   <div class="inline-flex items-center">
 
   
-    <StarIcon v-for="i in 5" :key="i"  :size="size + ''" class="mr-[2px]" 
+    <StarIcon v-for="i in rating" :key="i"  :size="size + ''" class="mr-[2px]" 
     :style="{ color: rating < i ? '#ccc' : '#FBBE24' }" />
 
     

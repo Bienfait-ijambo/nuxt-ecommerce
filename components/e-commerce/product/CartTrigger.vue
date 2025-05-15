@@ -8,15 +8,14 @@ function toggleCart(){
 <template>
   <div class="relative cursor-pointer inline-flex" title="Cart" @click="toggleCart">
     <Icon name="ion:cart-outline" size="22" class="mr-1 md:mr-0" />
-    <ClientOnly>
+    
       <Transition name="popIn" mode="out-in">
-        <span
-         
-          class="bg-primary rounded-full text-white leading-none min-w-[16px] p-[3px] -top-1 -right-1 md:-right-2 text-[10px] absolute inline-flex justify-center items-center">
+      
+      <span class="bg-primary rounded-full text-white leading-none absolute   min-w-[16px] p-[3px] -top-1 -right-4 md:-right-2 text-[10px]  inline-flex justify-center items-center">
           12
-        </span>
+        </span> 
       </Transition>
-    </ClientOnly>
+  
   </div>
 </template>
 

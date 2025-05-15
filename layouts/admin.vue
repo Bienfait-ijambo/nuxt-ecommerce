@@ -50,10 +50,12 @@ function  toggleDrawer() {
         drawerOpen.value = !drawerOpen.value
       }
 
-      function logoutUser(){
-        userCookie.value=null
-        window.location.href='/auth/signin'
-      }
+      const {$logout}=useNuxtApp()
+
+      // function logoutUser(){
+      //   userCookie.value=null
+      //   window.location.href='/auth/signin'
+      // }
       
 </script>
 <template>
@@ -151,7 +153,7 @@ function  toggleDrawer() {
                 </div>
                 <ul>
                  
-                  <li @click="logoutUser">
+                  <li @click="$logout()">
                     <a href="#" class="block text-red-500 px-4 py-2 hover:bg-gray-100"
                       >Logout</a
                     >
