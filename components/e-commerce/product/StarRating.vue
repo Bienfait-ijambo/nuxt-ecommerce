@@ -9,12 +9,16 @@ defineProps({
 
 <template>
   <div class="inline-flex items-center">
-
-  
-    <StarIcon v-for="i in rating" :key="i"  :size="size + ''" class="mr-[2px]" 
+    <!-- yellow bg -->
+    <StarIcon v-for="i in rating" :key="i"  :size="size + ''"
+    :fill="'#FBBE24'"
+     class="mr-[2px]" 
     :style="{ color: rating < i ? '#ccc' : '#FBBE24' }" />
 
-    
-    <span v-if="count !== null && !hideCount" class="text-xs ml-1 text-gray-500">({{ count }})</span>
+    <!-- gray bg -->
+    <StarIcon v-for="i in rating <5?(Math.abs(rating-5)):0" :key="i" 
+    :fill="'none'"
+     :size="size + ''" class="mr-[2px]" 
+    :style="{ color: rating < i ? '#ccc' : '#ccc' }" />
   </div>
 </template>

@@ -5,6 +5,8 @@
 const productEcomStore = useProductEcomStore();
 const { singleProductData } =
   storeToRefs(productEcomStore);
+  const productReviewStore=useProductReviewStore()
+
 
 const userCookie = useCookie('user', userCookieSettings);
  const hovered = ref(0);
@@ -25,6 +27,7 @@ function getSelectedStarNumber(val){
 
 }
   
+
 async function addComment(){
   try{
      loading.value = true;
@@ -33,6 +36,7 @@ async function addComment(){
       body: JSON.stringify(productReviewInput.value),
     });
     loading.value=false
+    await productReviewStore.fetchProductReviews(productReviewInput.value.productId)
     productReviewInput.value.comment=''
     successMsg(res?.message)
   }catch(error){

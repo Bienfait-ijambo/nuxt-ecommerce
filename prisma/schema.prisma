@@ -42,17 +42,26 @@ model Product {
   slug       String?
   color      String
   // price      String
-  price       Decimal @db.Decimal(10,2)
+  price      Decimal @db.Decimal(10,2)
   categoryId Int
   category   Category @relation(fields: [categoryId], references: [id])
   images     Image[]
-  reviews     ProductReview[]
-
-  
+  reviews    ProductReview[]
+  stars       productStar[]
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
 }
 
+
+
+model productStar {
+  id         Int      @id @default(autoincrement())
+  productId   Int
+  receivedStars Int
+  product   Product @relation(fields: [productId], references: [id])
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
 
 model ProductReview {
   id         Int      @id @default(autoincrement())

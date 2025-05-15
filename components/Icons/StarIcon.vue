@@ -1,8 +1,11 @@
-<script setup></script>
+<script setup>
+const props=defineProps(['fill'])
+
+</script>
 <template>
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    fill="#FBBE24"
+    :fill="fill"
     viewBox="0 0 24 24"
     stroke-width="1.5"
     stroke="currentColor"

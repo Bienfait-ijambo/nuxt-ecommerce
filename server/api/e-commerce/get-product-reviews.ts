@@ -24,14 +24,10 @@ export default defineEventHandler(async (event) => {
            
             include: {
                 reviews: true,
-                
+
             },
           
         })
-
-
-
-
 
     return {
         productReviews

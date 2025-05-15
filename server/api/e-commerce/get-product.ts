@@ -32,7 +32,7 @@ export default defineEventHandler(async (event) => {
 
     }
 
-  
+
     // colors,categories,prices
     const [products, total] = await Promise.all([
 
@@ -48,7 +48,13 @@ export default defineEventHandler(async (event) => {
             include: {
                 category: true,
                 images: true,
-                 reviews: true,
+                stars:true,
+                _count: {
+                    select: {
+                        reviews: true
+                    }
+                }
+
             },
             // 2-1*limit=10
             skip: (page - 1) * limit,

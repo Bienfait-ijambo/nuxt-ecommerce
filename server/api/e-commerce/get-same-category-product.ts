@@ -23,11 +23,6 @@ export default defineEventHandler(async (event) => {
           
         })
 
-        // id
-        // slug
-
-
-
     return {
         products 
     };

@@ -8,6 +8,21 @@ const config=useRuntimeConfig()
 const FALL_BACK_IMG_URL=config?.public?.FALL_BACK_IMG_URL
 
 
+function computeProductReview(product){
+  if(Array.isArray(product?.stars)){
+    const starArray=product?.stars
+    const totalReviews=product?._count?.reviews
+    if(starArray.length >0){
+      return parseInt(starArray[0].receivedStars/totalReviews)
+    
+    }else{
+      return 0
+    }
+  
+  }
+ 
+}
+
 
 </script>
 
@@ -26,11 +41,13 @@ const FALL_BACK_IMG_URL=config?.public?.FALL_BACK_IMG_URL
         :loading="'lazy'"
         :sizes="`sm:${imgWidth / 2}px md:${imgWidth}px`"
         class="rounded-lg object-top object-cover w-full aspect-9/8"
-        placeholder
+        
         placeholder-class="blur-xl" />
     </NuxtLink>
     <div class="p-2">
-      <StarRating  />
+
+      <StarRating :rating="computeProductReview(product)" />
+
       <NuxtLink :to="`/product/${product?.slug}`" :title="product?.name">
         <h2 class="mb-2 font-light leading-tight group-hover:text-primary">{{product?.name}}</h2>
       </NuxtLink>
