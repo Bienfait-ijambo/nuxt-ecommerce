@@ -44,6 +44,8 @@ export default defineEventHandler(async (event) => {
             productId: productId,
         }
     })
+
+    await createProductStarPercent(productId,starNumber)
     //if productId exist
     if (productStar) {
         //increment receivedStars column
@@ -75,15 +77,52 @@ export default defineEventHandler(async (event) => {
 
 
 
-
-
-
-    // model  {
-    //   id         Int      @id @default(autoincrement())
-    //   productId   Int
-    //    Int
-
-
-
     return { message: 'Review saved successfully', };
 })
+
+
+async function createProductStarPercent(productId:number,starNumber:number){
+     const starPercentExist = await prisma.productStarPercent.findFirst({
+        where: {
+            productId: productId,
+            starNumber: starNumber
+        }
+    })
+
+
+   
+    //if productId exist
+    if (starPercentExist) {
+        //increment receivedStars column
+        const nbrTimes = starPercentExist?.times
+        const updateTimes = nbrTimes + 1
+        await prisma.productStarPercent.update({
+        where:{
+           id: starPercentExist?.id,
+        },
+        data: {
+            times: updateTimes,
+            productId: productId,
+            star:starNumber
+
+        }
+    })
+
+        
+    } else {
+        // insert 
+        await prisma.productStarPercent.create({
+            data: {
+
+                times: 1,
+                productId: productId,
+                star:starNumber
+
+            }
+        })
+    }
+
+}
+
+
+// productStarPercent

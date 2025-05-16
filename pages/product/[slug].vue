@@ -38,8 +38,7 @@ const {productReviewData}=storeToRefs(productReviewStore)
           :images="singleProductData?.products?.images"
           class="relative flex-1"
         />
-        <!-- <NuxtImg v-else class="relative flex-1 skeleton" src="/images/placeholder.jpg" :alt="product?.name || 'Product'" /> -->
-
+      
         <div class="lg:max-w-md xl:max-w-lg md:py-2 w-full">
           <div class="flex justify-between mb-4">
             <div class="flex-1">
@@ -48,7 +47,7 @@ const {productReviewData}=storeToRefs(productReviewStore)
               >
                 {{ singleProductData?.products?.name }}
               </h1>
-              <StarRating />
+              <StarRating :rating="computeProductReview(singleProductData?.products)" />
             </div>
             <ProductPrice
               class="text-xl"
@@ -84,13 +83,7 @@ const {productReviewData}=storeToRefs(productReviewStore)
                 :class="{ loading: true }"
               />
             </div>
-            <!-- <a
-              v-if="isExternalProduct && product.externalUrl"
-              :href="product.externalUrl"
-              target="_blank"
-              class="rounded-lg flex font-bold bg-gray-800 text-white text-center min-w-[150px] p-2.5 gap-4 items-center justify-center focus:outline-none">
-              {{ product?.buttonText || 'View product' }}
-            </a> -->
+            
           </form>
 
           <div>
@@ -99,7 +92,7 @@ const {productReviewData}=storeToRefs(productReviewStore)
                 <span class="text-gray-400">Category :</span>
                 <div class="product-categories">
                   <NuxtLink class="hover:text-primary" title="category-name"
-                    >Category-name<span class="comma">, </span>
+                    >{{ singleProductData?.products?.category?.name }}<span class="comma">, </span>
                   </NuxtLink>
                 </div>
               </div>

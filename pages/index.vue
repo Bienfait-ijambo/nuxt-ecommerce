@@ -1,3 +1,4 @@
+
 <script setup lang="ts">
 
 
@@ -6,7 +7,8 @@
 
 <template>
   <div class="container flex items-start gap-16" >
-    <Filters v-if="true" />
+    <Filters />
+   
 
     <div class="w-full">
       <div class="flex items-center justify-between w-full gap-4 mt-8 md:gap-8">

@@ -48,10 +48,26 @@ model Product {
   images     Image[]
   reviews    ProductReview[]
   stars       productStar[]
+  starPercents productStarPercent[]
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
 }
 
+
+
+// productStarPercent
+// -----------------
+// productId,times,star
+
+model productStarPercent {
+  id         Int      @id @default(autoincrement())
+  productId   Int
+  times Int
+  star Int
+  product   Product @relation(fields: [productId], references: [id])
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
 
 
 model productStar {

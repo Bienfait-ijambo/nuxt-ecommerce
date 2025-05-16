@@ -42,13 +42,14 @@ export default defineEventHandler(async (event) => {
             where: filters.length > 0 ?
                 { AND: filters }
                 : {},
+
             orderBy: {
                 createdAt: 'desc'
             },
             include: {
                 category: true,
                 images: true,
-                stars:true,
+                stars: true,
                 _count: {
                     select: {
                         reviews: true
@@ -73,10 +74,26 @@ export default defineEventHandler(async (event) => {
 
     ])
 
+    // const newProductArray = false ? products.filter((item) => {
+    //     if (Array.isArray(item.stars)) {
+    //         if (item.stars.length > 0) {
+    //             if (item.stars[0].receivedStars === (4 * 2)) {
+    //                 return item
+    //             }
 
+    //             if (item.stars[0].receivedStars === ((4 * 2) + 1)) {
+    //                 return item
+    //             }
+    //         }
+    //     }
+
+
+    // }) : products
 
     return {
-        products, metadata: {
+        products,
+        // newProductArray,
+        metadata: {
             total,
             page,
             limit,

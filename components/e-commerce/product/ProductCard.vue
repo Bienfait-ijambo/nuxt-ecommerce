@@ -8,21 +8,6 @@ const config=useRuntimeConfig()
 const FALL_BACK_IMG_URL=config?.public?.FALL_BACK_IMG_URL
 
 
-function computeProductReview(product){
-  if(Array.isArray(product?.stars)){
-    const starArray=product?.stars
-    const totalReviews=product?._count?.reviews
-    if(starArray.length >0){
-      return parseInt(starArray[0].receivedStars/totalReviews)
-    
-    }else{
-      return 0
-    }
-  
-  }
- 
-}
-
 
 </script>
 

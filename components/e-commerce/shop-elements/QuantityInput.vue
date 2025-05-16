@@ -1,33 +1,5 @@
 <script setup lang="ts">
-// const { updateItemQuantity, isUpdatingCart, cart } = useCart();
-// const { debounce } = useHelpers();
 
-// const { item } = defineProps({ item: { type: Object, required: true } });
-
-// const productType = computed(() => (item.variation ? item.variation?.node : item.product?.node));
-// const quantity = ref(item.quantity);
-// const hasNoMoreStock = computed(() => (productType.value.stockQuantity ? productType.value.stockQuantity <= quantity.value : false));
-
-// const incrementQuantity = () => quantity.value++;
-// const decrementQuantity = () => quantity.value--;
-
-// watch(
-//   quantity,
-//   debounce(() => {
-//     if (quantity.value !== "") {
-//       updateItemQuantity(item.key, quantity.value);
-//     }
-//   }, 250),
-// );
-
-// const onFocusOut = () => {
-//   if (quantity.value === "") { // If the quantity is empty, set it to the cart item quantity
-//     const cartItem = cart.value?.contents?.nodes?.find(node => node.key === item.key);
-//     if (cartItem) {
-//       quantity.value = cartItem.quantity;
-//     }
-//   }
-// };
 </script>
 
 <template>
