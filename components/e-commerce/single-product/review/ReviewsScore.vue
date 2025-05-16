@@ -5,50 +5,46 @@ const props = defineProps({
   size: { type: Number, default: 21 },
 });
 
-
-
 const show = ref(false);
 
+const productEcomStore = useProductEcomStore();
+const { singleProductData } = storeToRefs(productEcomStore);
 
-const starPercent = [
-  {
-    star: 1,
-    percent: 5,
-  },
-  {
-    star: 2,
-    percent: 14,
-  },
-  {
-    star: 3,
-    percent: 24,
-  },
-  {
-    star: 4,
-    percent: 5,
-  },
-  {
-    star: 5,
-    percent: 94,
-  },
-];
-async function addComment() {
-  console.log("add comment...");
+function displayMissingStars(starPercents) {
+  const newStarPercents = [];
+  const stars = [1, 2, 3, 4, 5];
+
+  stars.forEach((star) => {
+    const exist = starPercents.filter((item) => item.star === star);
+    if (exist.length > 0) {
+      newStarPercents.push(exist[0]);
+    } else {
+      newStarPercents.push({
+        id: null,
+        productId: null,
+        times: 0,
+        star: star,
+      });
+    }
+  });
+
+  return newStarPercents;
 }
 </script>
 
 <template>
   <div>
-    <h4 class="font-semibold text-2xl text-gray-900">
-      Customer Reviews
-    </h4>
+    <h4 class="font-semibold text-2xl text-gray-900">Customer Reviews</h4>
     <div class="my-2">
-      <StarRating class="text-sm mr-2" />
+      <StarRating
+        :rating="computeProductReview(singleProductData?.products)"
+        class="text-sm mr-2"
+      />
     </div>
     <div class="my-4 bars">
       <!-- percent -->
       <div
-        v-for="rating in starPercent"
+        v-for="rating in displayMissingStars(singleProductData?.products?.starPercents)"
         :key="rating"
         class="flex gap-4 items-center"
       >
@@ -60,7 +56,11 @@ async function addComment() {
           <div class="rounded-full bg-gray-200 h-2.5 w-full"></div>
           <div
             class="rounded-full bg-yellow-400 h-2.5 top-0 left-0 absolute"
-            :style="{ width: rating?.percent + '%' }"
+            :style="{
+              width:
+                (rating?.star * rating?.times * 100) / (5 * rating?.times) +
+                '%',
+            }"
           ></div>
         </div>
       </div>

@@ -85,7 +85,7 @@ async function createProductStarPercent(productId:number,starNumber:number){
      const starPercentExist = await prisma.productStarPercent.findFirst({
         where: {
             productId: productId,
-            starNumber: starNumber
+            star: starNumber
         }
     })
 

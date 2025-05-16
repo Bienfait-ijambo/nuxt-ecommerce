@@ -54,7 +54,8 @@ export default defineEventHandler(async (event) => {
                     select: {
                         reviews: true
                     }
-                }
+                },
+                
 
             },
             // 2-1*limit=10

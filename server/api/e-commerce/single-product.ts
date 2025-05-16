@@ -23,7 +23,8 @@ export default defineEventHandler(async (event) => {
                     }
                 },
                 // reviews:true
-                
+                starPercents:true
+              
                 
             },
           
