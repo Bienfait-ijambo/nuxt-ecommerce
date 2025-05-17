@@ -34,20 +34,3 @@ export default defineEventHandler(async (event) => {
     };
 })
 
-
-// [
-//     {
-//       "id": 1,
-//       "name": "Product Name",
-//       "color": "Black",
-//       "price": "29.99",
-//       "categoryId": 2,
-//       "createdAt": "...",
-//       "updatedAt": "...",
-       
-//       "images": [
-//         { "id": 10, "url": "..." },
-//         { "id": 11, "url": "..." }
-//       ]
-//     }
-//   ]

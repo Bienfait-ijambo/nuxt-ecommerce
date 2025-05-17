@@ -9,7 +9,7 @@ const productStore=useProductStore()
 const {productColors}=storeToRefs(productStore)
 
 const productEcomStore=useProductEcomStore()
-const {selectedCategories,selectedPrices,selectedColors}=storeToRefs(productEcomStore)
+const {selectedCategories,selectedPrices,selectedColors,selectedStar}=storeToRefs(productEcomStore)
 
 
 async function fetchProductByCategories(categories:number[]){
@@ -18,12 +18,21 @@ async function fetchProductByCategories(categories:number[]){
 }
 async function fetchProductByColors(colors:string[]){
   selectedColors.value=colors
-  await productEcomStore.fetchProducts(selectedCategories.value,selectedPrices.value,selectedColors.value)
+  await productEcomStore.fetchProducts(selectedCategories.value,selectedPrices.value,
+  selectedColors.value,selectedStar.value)
 }
 
 async function fetchProductByPrice(prices:number[]){
    selectedPrices.value=prices
-  await productEcomStore.fetchProducts(selectedCategories.value,selectedPrices.value,selectedColors.value)
+  await productEcomStore.fetchProducts(selectedCategories.value,selectedPrices.value,
+  selectedColors.value,selectedStar.value)
+}
+
+
+async function fetchProductByStars(starRating:number){
+    selectedStar.value=starRating
+  await productEcomStore.fetchProducts(selectedCategories.value,selectedPrices.value,
+  selectedColors.value,selectedStar.value)
 
 }
 
@@ -40,11 +49,9 @@ async function fetchProductByPrice(prices:number[]){
 
       <div v-for="attribute in attributesWithTerms" :key="attribute.slug">
         <ColorFilter @fetchProducts="fetchProductByColors" :colors="productColors" />
-        <!-- <GlobalFilter /> -->
       </div>
 
-      <LazyStarRatingFilter  />
-      <!-- <OnSaleFilter /> -->
+      <LazyStarRatingFilter  @fetchProducts="fetchProductByStars"   />
       <LazyResetFiltersButton  />
     </div>
   </aside>

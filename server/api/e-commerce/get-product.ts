@@ -75,25 +75,32 @@ export default defineEventHandler(async (event) => {
 
     ])
 
-    // const newProductArray = false ? products.filter((item) => {
-    //     if (Array.isArray(item.stars)) {
-    //         if (item.stars.length > 0) {
-    //             if (item.stars[0].receivedStars === (4 * 2)) {
-    //                 return item
-    //             }
+ 
+    const starRatingFilter=query?.starRating?
+    parseInt(query.starRating.toString()):NaN
+    
+    const newProductArray = !Number.isNaN(starRatingFilter)
 
-    //             if (item.stars[0].receivedStars === ((4 * 2) + 1)) {
-    //                 return item
-    //             }
-    //         }
-    //     }
+    ? products.filter((item) => {
+        if (Array.isArray(item.stars)) {
+            if (item.stars.length > 0) {
+                // 4*2=8
+                if (item.stars[0].receivedStars === (starRatingFilter* item._count.reviews)) {
+                    return item
+                }
+
+                if (item.stars[0].receivedStars ===((starRatingFilter* item._count.reviews)+1)) {
+                    return item
+                }
+            }
+        }
 
 
-    // }) : products
+    }) 
+    : products
 
     return {
-        products,
-        // newProductArray,
+        products:newProductArray,
         metadata: {
             total,
             page,
@@ -104,22 +111,4 @@ export default defineEventHandler(async (event) => {
 })
 
 
-// [
-//     {
-//       "id": 1,
-//       "name": "Product Name",
-//       "color": "Black",
-//       "price": "29.99",
-//       "categoryId": 2,
-//       "createdAt": "...",
-//       "updatedAt": "...",
-//       "category": {
-//         "id": 2,
-//         "name": "Electronics"
-//       },
-//       "images": [
-//         { "id": 10, "url": "..." },
-//         { "id": 11, "url": "..." }
-//       ]
-//     }
-//   ]
+

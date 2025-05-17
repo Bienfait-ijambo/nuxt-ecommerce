@@ -11,24 +11,26 @@ const productEcomStore = useProductEcomStore();
 const { singleProductData } = storeToRefs(productEcomStore);
 
 function displayMissingStars(starPercents) {
-  const newStarPercents = [];
-  const stars = [1, 2, 3, 4, 5];
+  if (Array.isArray(starPercents)) {
+    const newStarPercents = [];
+    const stars = [1, 2, 3, 4, 5];
 
-  stars.forEach((star) => {
-    const exist = starPercents.filter((item) => item.star === star);
-    if (exist.length > 0) {
-      newStarPercents.push(exist[0]);
-    } else {
-      newStarPercents.push({
-        id: null,
-        productId: null,
-        times: 0,
-        star: star,
-      });
-    }
-  });
+    stars.forEach((star) => {
+      const exist = starPercents.filter((item) => item.star === star);
+      if (exist.length > 0) {
+        newStarPercents.push(exist[0]);
+      } else {
+        newStarPercents.push({
+          id: null,
+          productId: null,
+          times: 0,
+          star: star,
+        });
+      }
+    });
 
-  return newStarPercents;
+    return newStarPercents;
+  }
 }
 </script>
 
@@ -44,7 +46,9 @@ function displayMissingStars(starPercents) {
     <div class="my-4 bars">
       <!-- percent -->
       <div
-        v-for="rating in displayMissingStars(singleProductData?.products?.starPercents)"
+        v-for="rating in displayMissingStars(
+          singleProductData?.products?.starPercents
+        )"
         :key="rating"
         class="flex gap-4 items-center"
       >
