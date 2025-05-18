@@ -8,6 +8,9 @@ const { fetchSingleProductData, singleProductData, sameCategoryProduct } =
   const productReviewStore=useProductReviewStore()
 const {productReviewData}=storeToRefs(productReviewStore)
 
+const shoppingCartStore=useShoppingCartStore()
+const {shoppingCartData,showCart}=storeToRefs(shoppingCartStore)
+
 
 
 
@@ -28,7 +31,7 @@ const {productReviewData}=storeToRefs(productReviewStore)
   <main class="container relative py-6 xl:max-w-7xl">
     <div>
       <Breadcrumb class="mb-6" />
-      <Cart/>
+      <Cart v-show="showCart"/>
 
       
       <div
@@ -59,7 +62,6 @@ const {productReviewData}=storeToRefs(productReviewStore)
 
           <hr />
 
-          <form>
           
             <div
               class="fixed bottom-0 left-0 z-10 flex items-center w-full gap-4 p-4 mt-12 bg-white md:static md:bg-transparent bg-opacity-90 md:p-0"
@@ -73,12 +75,12 @@ const {productReviewData}=storeToRefs(productReviewStore)
               />
               <AddToCartButton
                 class="flex-1 w-full md:max-w-xs"
+                @click="shoppingCartStore.addProductToCart(singleProductData?.products)"
                 :disabled="false"
                 :class="{ loading: true }"
               />
             </div>
             
-          </form>
 
           <div>
             <div class="grid gap-2 my-8 text-sm">

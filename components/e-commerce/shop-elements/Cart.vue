@@ -1,20 +1,25 @@
 <script setup>
+
+const shoppingCartStore=useShoppingCartStore()
+const {shoppingCartData}=storeToRefs(shoppingCartStore)
+
+
 </script>
 
 <template>
   <div class="fixed top-0 bottom-0 right-0 z-50 flex flex-col w-11/12 max-w-lg overflow-x-hidden bg-white shadow-lg">
-    <!-- @click="toggleCart(false)" -->
-    <Icon name="ion:close-outline" class="absolute p-1 rounded-lg shadow-lg top-6 left-6 md:left-8 cursor-pointer" size="34"  />
-    <EmptyCart class="rounded-lg shadow-lg p-1.5 hover:bg-red-400 hover:text-white" />
+    <Icon @click="shoppingCartStore.toggleShoppingCart" name="ion:close-outline" class="absolute p-1 rounded-lg shadow-lg top-6 left-6 md:left-8 cursor-pointer" size="34"  />
+    <EmptyCart @click="shoppingCartStore.clearOutCart" class="rounded-lg shadow-lg p-1.5 hover:bg-red-400 hover:text-white" />
 
     <div class="mt-8 text-center">
-      Cart <span> (12) </span>
+      Cart <span> ({{shoppingCartData.length}}) </span>
       
     </div>
 
         <ul class="flex flex-col flex-1 gap-4 p-6 overflow-y-scroll md:p-8">
-          <CartCard  />
-          <CartCard  />
+          <CartCard  :products="shoppingCartData"/>
+
+          
 
         </ul>
         <div class="px-8 mb-8">

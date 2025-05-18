@@ -47,8 +47,11 @@
           <!-- Pay methods -->
           <div  class="mt-2 col-span-full">
             <h2 class="mb-4 text-xl font-semibold">Payment Options</h2>
+            <ClientOnly>
+       <StripeElement />
+      </ClientOnly>
             <!-- <PaymentOptions v-model="orderInput.paymentMethod" class="mb-4" :paymentGateways /> -->
-            <StripeElement />
+          
             <!-- v-if="stripe" v-show="orderInput.paymentMethod.id == 'stripe'" :stripe @updateElement="handleStripeElement"  -->
           </div>
 

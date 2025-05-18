@@ -8,6 +8,7 @@ export const useProductStore = defineStore('product-store', () => {
     const page = ref(1)
     const limit = ref(10)
 
+    
     const productId = ref(null)
     const showUploadImageModal = ref(false)
     const showUploadedImageModal = ref(false)

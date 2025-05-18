@@ -1,5 +1,6 @@
-<script setup lang="ts">
-
+<script setup >
+const props=defineProps(['quantity','productId'])
+const emit=defineEmits(['addQuantity'])
 </script>
 
 <template>
@@ -15,8 +16,10 @@
       <Icon name="ion:remove" size="14" />
     </button>
     <!-- @focusout="onFocusOut" -->
+   {{props.quantity}}
     <input
       type="number"
+      v-modal="props.quantity"
       min="0"
       aria-label="Quantity"
       
@@ -24,6 +27,7 @@
     <button
       title="Increase Quantity"
       aria-label="Increase Quantity"
+      @click="emit('addQuantity',props.productId,props.quantity)"
       type="button"
       class="focus:outline-none border-l w-6 h-6 border rounded-r hover:bg-gray-50 border-gray-300 disabled:cursor-not-allowed disabled:bg-gray-100"
      

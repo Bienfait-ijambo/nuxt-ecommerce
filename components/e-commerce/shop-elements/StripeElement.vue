@@ -12,14 +12,14 @@ const options = {
 };
 
 const createStripeElements = async () => {
-  elements = stripe.elements(options);
+  elements = stripe.value.elements(options);
   const paymentElement = elements.create('card', { hidePostalCode: true });
   paymentElement.mount('#card-element');
 //   emit('updateElement', elements);
 };
 
 onMounted(() => {
-  createStripeElements();
+  setTimeout(()=>createStripeElements(),3000)
 });
 </script>
 

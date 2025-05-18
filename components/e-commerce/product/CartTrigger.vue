@@ -1,18 +1,18 @@
 <script setup>
-// const { toggleCart, cart } = useCart();
-function toggleCart(){
-    console.log('...')
-}
+
+const shoppingCartStore=useShoppingCartStore()
+const {shoppingCartData,showCart}=storeToRefs(shoppingCartStore)
+
 </script>
 
 <template>
-  <div class="relative cursor-pointer inline-flex" title="Cart" @click="toggleCart">
+  <div class="relative cursor-pointer inline-flex" title="Cart" @click="shoppingCartStore.toggleShoppingCart">
     <Icon name="ion:cart-outline" size="22" class="mr-1 md:mr-0" />
     
       <Transition name="popIn" mode="out-in">
       
-      <span class="bg-primary rounded-full text-white leading-none absolute   min-w-[16px] p-[3px] -top-1 -right-4 md:-right-2 text-[10px]  inline-flex justify-center items-center">
-          12
+      <span v-if="shoppingCartData.length>0?true:false" class="bg-primary rounded-full text-white leading-none absolute   min-w-[16px] p-[3px] -top-1 -right-4 md:-right-2 text-[10px]  inline-flex justify-center items-center">
+          {{shoppingCartData.length}}
         </span> 
       </Transition>
   
