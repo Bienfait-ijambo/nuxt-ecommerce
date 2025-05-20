@@ -11,93 +11,94 @@ datasource db {
 }
 
 model User {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
+  id           Int             @id @default(autoincrement())
+  email        String          @unique
   isValidEmail Int
-  otpCode String
-  name  String?
-  password String
-  role String?
-  reviews ProductReview[]
-
-
+  otpCode      String
+  name         String?
+  password     String
+  role         String?
+  reviews      ProductReview[]
+  payments     payment[]
 }
-
-
 
 model Category {
-  id    Int     @id @default(autoincrement())
-  name String  @unique
- products Product[]
+  id       Int       @id @default(autoincrement())
+  name     String    @unique
+  products Product[]
 }
-
-
-
-
-
 
 model Product {
-  id         Int      @id @default(autoincrement())
-  name       String
-  slug       String?
-  color      String
+  id           Int                  @id @default(autoincrement())
+  name         String
+  slug         String?
+  color        String
   // price      String
-  price      Decimal @db.Decimal(10,2)
-  categoryId Int
-  category   Category @relation(fields: [categoryId], references: [id])
-  images     Image[]
-  reviews    ProductReview[]
-  stars       productStar[]
+  price        Decimal              @db.Decimal(10, 2)
+  categoryId   Int
+  category     Category             @relation(fields: [categoryId], references: [id])
+  images       Image[]
+  reviews      ProductReview[]
+  stars        productStar[]
   starPercents productStarPercent[]
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  payments     payment[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
+model payment {
+  id        Int     @id @default(autoincrement())
+  productId Int
+  userId    Int
+  amount    Decimal @db.Decimal(10, 2)
+  product   Product @relation(fields: [productId], references: [id])
+  user      User    @relation(fields: [userId], references: [id])
 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
 
 // productStarPercent
 // -----------------
 // productId,times,star
 
 model productStarPercent {
-  id         Int      @id @default(autoincrement())
-  productId   Int
-  times Int
-  star Int
-  product   Product @relation(fields: [productId], references: [id])
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  id        Int      @id @default(autoincrement())
+  productId Int
+  times     Int
+  star      Int
+  product   Product  @relation(fields: [productId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
-
 model productStar {
-  id         Int      @id @default(autoincrement())
-  productId   Int
+  id            Int      @id @default(autoincrement())
+  productId     Int
   receivedStars Int
-  product   Product @relation(fields: [productId], references: [id])
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  product       Product  @relation(fields: [productId], references: [id])
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 }
 
 model ProductReview {
-  id         Int      @id @default(autoincrement())
+  id         Int    @id @default(autoincrement())
   userId     Int
-  starNumber  Int
-  productId   Int
+  starNumber Int
+  productId  Int
   comment    String
 
-  user   User @relation(fields: [userId], references: [id])
-  product   Product @relation(fields: [productId], references: [id])
+  user    User    @relation(fields: [userId], references: [id])
+  product Product @relation(fields: [productId], references: [id])
 
-  
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Image {
-  id        Int       @id @default(autoincrement())
+  id        Int     @id @default(autoincrement())
   url       String
-  productId Int 
-  product   Product  @relation(fields: [productId], references: [id])
- 
+  productId Int
+  product   Product @relation(fields: [productId], references: [id])
 }

@@ -1,9 +1,12 @@
 <script setup>
 
 const shoppingCartStore=useShoppingCartStore()
-const {shoppingCartData}=storeToRefs(shoppingCartStore)
+const {shoppingCartData,totalPrice}=storeToRefs(shoppingCartStore)
 
 
+onMounted(()=>{
+  shoppingCartStore.getCartDataFromLocalStorage()
+})
 </script>
 
 <template>
@@ -29,7 +32,7 @@ const {shoppingCartData}=storeToRefs(shoppingCartStore)
            
             >
             <span class="mx-2">Check out</span>
-            <span v-html="'1280.00'" />
+            <span v-html="shoppingCartStore.formatToUsCurreny(totalPrice)" />
           </NuxtLink>
         </div>
       <!-- Empty Cart Message -->

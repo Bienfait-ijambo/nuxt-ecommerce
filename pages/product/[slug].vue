@@ -1,39 +1,32 @@
-<script setup >
+<script setup>
 const quantity = ref(1);
 const route = useRoute();
 
 const productEcomStore = useProductEcomStore();
 const { fetchSingleProductData, singleProductData, sameCategoryProduct } =
   storeToRefs(productEcomStore);
-  const productReviewStore=useProductReviewStore()
-const {productReviewData}=storeToRefs(productReviewStore)
+const productReviewStore = useProductReviewStore();
+const { productReviewData } = storeToRefs(productReviewStore);
 
-const shoppingCartStore=useShoppingCartStore()
-const {shoppingCartData,showCart}=storeToRefs(shoppingCartStore)
+const shoppingCartStore = useShoppingCartStore();
+const { shoppingCartData, showCart, defaultQuantity } =
+  storeToRefs(shoppingCartStore);
 
+productEcomStore.fetchSingleProductData(route.params?.slug).then(async () => {
+  const categoryId = singleProductData.value?.products?.categoryId;
+  const productId = singleProductData.value?.products?.id;
 
-
-
-
-      productEcomStore.fetchSingleProductData(route.params?.slug).then(async() => {
-  const categoryId = singleProductData.value?.products?.categoryId
-  const productId = singleProductData.value?.products?.id
-
- await  productReviewStore.fetchProductReviews(productId)
-  await productEcomStore.fetchProductWithSameCategory(categoryId)
- })
-
-
-
+  await productReviewStore.fetchProductReviews(productId);
+  await productEcomStore.fetchProductWithSameCategory(categoryId);
+});
 </script>
 
 <template>
   <main class="container relative py-6 xl:max-w-7xl">
     <div>
       <Breadcrumb class="mb-6" />
-      <Cart v-show="showCart"/>
+      <Cart v-show="showCart" />
 
-      
       <div
         class="flex flex-col gap-10 md:flex-row md:justify-between lg:gap-24"
       >
@@ -41,7 +34,7 @@ const {shoppingCartData,showCart}=storeToRefs(shoppingCartStore)
           :images="singleProductData?.products?.images"
           class="relative flex-1"
         />
-      
+
         <div class="lg:max-w-md xl:max-w-lg md:py-2 w-full">
           <div class="flex justify-between mb-4">
             <div class="flex-1">
@@ -50,7 +43,9 @@ const {shoppingCartData,showCart}=storeToRefs(shoppingCartStore)
               >
                 {{ singleProductData?.products?.name }}
               </h1>
-              <StarRating :rating="computeProductReview(singleProductData?.products)" />
+              <StarRating
+                :rating="computeProductReview(singleProductData?.products)"
+              />
             </div>
             <ProductPrice
               class="text-xl"
@@ -59,28 +54,27 @@ const {shoppingCartData,showCart}=storeToRefs(shoppingCartStore)
             />
           </div>
 
-
           <hr />
 
-          
-            <div
-              class="fixed bottom-0 left-0 z-10 flex items-center w-full gap-4 p-4 mt-12 bg-white md:static md:bg-transparent bg-opacity-90 md:p-0"
-            >
-              <input
-                v-model="quantity"
-                type="number"
-                min="1"
-                aria-label="Quantity"
-                class="bg-white border rounded-lg flex text-left p-2.5 w-20 gap-4 items-center justify-center focus:outline-none"
-              />
-              <AddToCartButton
-                class="flex-1 w-full md:max-w-xs"
-                @click="shoppingCartStore.addProductToCart(singleProductData?.products)"
-                :disabled="false"
-                :class="{ loading: true }"
-              />
-            </div>
-            
+          <div
+            class="fixed bottom-0 left-0 z-10 flex items-center w-full gap-4 p-4 mt-12 bg-white md:static md:bg-transparent bg-opacity-90 md:p-0"
+          >
+            <input
+              v-model="defaultQuantity"
+              type="number"
+              min="1"
+              aria-label="Quantity"
+              class="bg-white border rounded-lg flex text-left p-2.5 w-20 gap-4 items-center justify-center focus:outline-none"
+            />
+            <AddToCartButton
+              class="flex-1 w-full md:max-w-xs"
+              @click="
+                shoppingCartStore.addProductToCart(singleProductData?.products)
+              "
+              :disabled="false"
+              :class="{ loading: true }"
+            />
+          </div>
 
           <div>
             <div class="grid gap-2 my-8 text-sm">
@@ -88,7 +82,8 @@ const {shoppingCartData,showCart}=storeToRefs(shoppingCartStore)
                 <span class="text-gray-400">Category :</span>
                 <div class="product-categories">
                   <NuxtLink class="hover:text-primary" title="category-name"
-                    >{{ singleProductData?.products?.category?.name }}<span class="comma">, </span>
+                    >{{ singleProductData?.products?.category?.name
+                    }}<span class="comma">, </span>
                   </NuxtLink>
                 </div>
               </div>
@@ -109,7 +104,10 @@ const {shoppingCartData,showCart}=storeToRefs(shoppingCartStore)
         <div class="mb-4 text-xl font-semibold">
           You May Also Like <Icon name="uil:github" />
         </div>
-        <LazyProductRow :productData="sameCategoryProduct" class="grid-cols-2 md:grid-cols-4 lg:grid-cols-5" />
+        <LazyProductRow
+          :productData="sameCategoryProduct"
+          class="grid-cols-2 md:grid-cols-4 lg:grid-cols-5"
+        />
       </div>
     </div>
   </main>

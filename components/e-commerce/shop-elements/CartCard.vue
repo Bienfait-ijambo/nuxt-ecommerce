@@ -14,6 +14,10 @@ const FALL_BACK_IMG_URL=config?.public?.FALL_BACK_IMG_URL
 function addQuantity(productId,quantity){
   shoppingCartStore.addQuantity(productId,parseInt(quantity.toString()))
 }
+
+function reduceQuantity(productId,quantity){
+  shoppingCartStore.reduceQuantity(productId,parseInt(quantity.toString()))
+}
 </script>
 
 <template>
@@ -40,15 +44,21 @@ function addQuantity(productId,quantity){
             Low Stock
           </span> -->
         </div>
-         <ProductPrice class="mt-1 text-xs"  :sale-price=" product?.price+' $'" :regular-price="'14 $'" />
+         <ProductPrice class="mt-1 text-xs"  :sale-price=" product?.totalProductPrice+' $'" :regular-price="'14 $'" />
       </div>
     
       <div class="inline-flex gap-2 flex-col items-end">
-        <QuantityInput @addQuantity="addQuantity" :quantity="product?.quantity" :productId="product?.id"/>
+        <QuantityInput 
+        
+        @addQuantity="addQuantity" 
+        @reduceQuantity="reduceQuantity" 
+
+        :quantity="product?.quantity" 
+        :productId="product?.id"/>
         
         <div class="text-xs text-gray-400 group-hover:text-gray-700 flex leading-none items-center">
-          <!-- <button v-if="storeSettings.showMoveToWishlist" class="mr-2 pr-2 border-r" @click="moveToWishList" type="button">Move to Wishlist</button> -->
           <button
+          @click="shoppingCartStore.removeProductToCart(product?.id)"
             title="Remove Item"
             aria-label="Remove Item"
             type="button"

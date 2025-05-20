@@ -4,8 +4,10 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
 
     const { $isAuthenticated }: any = useNuxtApp()
     const headers = useHeaders()
-    try {
 
+ 
+    try {
+       
         const fromAdminLayout = from?.meta?.layout
         const toAdminLayout = to?.meta?.layout
         if (fromAdminLayout === 'admin' || toAdminLayout === 'admin') {

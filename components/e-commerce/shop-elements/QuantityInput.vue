@@ -1,6 +1,8 @@
 <script setup >
 const props=defineProps(['quantity','productId'])
-const emit=defineEmits(['addQuantity'])
+const emit=defineEmits(['addQuantity','reduceQuantity'])
+const DEFAULT_QANTITY_TO_REDUCE=1
+
 </script>
 
 <template>
@@ -8,18 +10,17 @@ const emit=defineEmits(['addQuantity'])
     <button
       title="Decrease Quantity"
       aria-label="Decrease Quantity"
+       @click="emit('reduceQuantity',props.productId,DEFAULT_QANTITY_TO_REDUCE)"
       type="button"
       class="focus:outline-none border-r w-6 h-6 border rounded-l border-gray-300 hover:bg-gray-50 disabled:cursor-not-allowed"
      
       >
-       <!-- :disabled="isUpdatingCart || quantity <= 0" -->
+
       <Icon name="ion:remove" size="14" />
     </button>
-    <!-- @focusout="onFocusOut" -->
-   {{props.quantity}}
     <input
       type="number"
-      v-modal="props.quantity"
+      v-model="props.quantity"
       min="0"
       aria-label="Quantity"
       

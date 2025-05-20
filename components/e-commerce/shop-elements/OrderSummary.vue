@@ -1,5 +1,11 @@
 <script setup>
-// const { cart, isUpdatingCart } = useCart();
+const shoppingCartStore=useShoppingCartStore()
+const {shoppingCartData,totalPrice}=storeToRefs(shoppingCartStore)
+
+
+onMounted(()=>{
+  shoppingCartStore.getCartDataFromLocalStorage()
+})
 </script>
 
 <template>
@@ -7,7 +13,9 @@
     <h2 class="mb-6 text-xl font-semibold leading-none">Order Summary</h2>
 
     <ul class="flex flex-col gap-4 overflow-y-auto">
-      <!-- <CartCard v-for="item in cart.contents.nodes" :key="item.key" :item /> -->
+      
+     <CartCard :products="shoppingCartData" />
+     
     </ul>
 
 
@@ -15,11 +23,9 @@
      
       <div class="flex justify-between mt-4">
         <span>Total</span>
-        <span class="text-lg font-bold text-gray-700 tabular-nums" v-html="'$100'" />
+        <span class="text-lg font-bold text-gray-700 tabular-nums" v-html="shoppingCartStore.formatToUsCurreny(totalPrice)" />
       </div>
     </div>
-
-    <slot></slot>
 
   </aside>
 </template>

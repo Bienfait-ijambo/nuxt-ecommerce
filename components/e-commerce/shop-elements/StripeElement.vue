@@ -1,30 +1,80 @@
-<script setup lang="ts">
-const { stripe ,isLoading} = useClientStripe();
-const rawCartTotal = computed(() => 1 * 100);
-// const emit = defineEmits(['updateElement']);
-let elements = null as any;
+<script setup>
+import { ref, onMounted } from 'vue';
 
-const options = {
-  mode: 'payment',
-  currency: 'eur',
-  amount: rawCartTotal.value,
-  // paymentMethodCreation: 'manual',
-};
+const { stripe } = useClientStripe();
+
+const shoppingCartStore=useShoppingCartStore()
+const {shoppingCartData,totalPrice}=storeToRefs(shoppingCartStore)
+
+const userCookie = useCookie('user', userCookieSettings);
+const isLoading = ref(false);
+let elements = null;
+let cardElement = null;
 
 const createStripeElements = async () => {
-  elements = stripe.value.elements(options);
-  const paymentElement = elements.create('card', { hidePostalCode: true });
-  paymentElement.mount('#card-element');
-//   emit('updateElement', elements);
+  elements = stripe.value.elements();
+
+  cardElement = elements.create('card', { hidePostalCode: true });
+  cardElement.mount('#card-element');
 };
 
+async function createPayment() {
+  isLoading.value = true;
+
+  const { clientSecret, error,message } = await $fetch("/api/e-commerce/payment/create-payment",{
+    method:'post',
+    body:JSON.stringify({
+      userData:userCookie.value?.data?.user,
+      productData:shoppingCartData.value,
+      totalPrice:totalPrice.value
+    })
+  });
+
+  if (error || !clientSecret) {
+    console.error('Client Secret Error:', error);
+    showError(error?.message)
+    isLoading.value = false;
+    return;
+  }
+
+  // Use the globally stored cardElement
+  const { paymentIntent, error: confirmError } = await stripe.value.confirmCardPayment(clientSecret, {
+    payment_method: {
+      card: cardElement,
+      billing_details: {
+        email: userCookie.value?.data?.user?.email,
+      },
+    },
+  });
+
+  if (confirmError) {
+    console.error('Payment failed:', confirmError.message);
+  } else {
+    shoppingCartStore.clearOutCart()
+  successMsg(message)
+    console.log('Payment successful:', paymentIntent);
+  }
+
+  isLoading.value = false;
+}
+
 onMounted(() => {
-  setTimeout(()=>createStripeElements(),3000)
+  setTimeout(() => createStripeElements(), 2000);
 });
 </script>
 
 <template>
-  <div id="card-element">
-    <!-- Elements will create form elements here -->
+  <div>
+    <div id="card-element" class="mb-4"></div>
+
+    <button
+    v-if="userCookie"
+      @click="createPayment"
+      :disabled="isLoading"
+     class="flex items-center justify-center gap-3 p-3 mt-4 font-semibold text-center text-white rounded-lg shadow-md bg-primary hover:bg-primary-dark disabled:cursor-not-allowed disabled:bg-gray-400"
+    >
+      <span v-if="isLoading">Processing...</span>
+      <span v-else>Pay Now  {{shoppingCartStore.formatToUsCurreny(totalPrice)}}</span>
+    </button>
   </div>
 </template>
