@@ -2,7 +2,7 @@
 import { useWebSocket } from '@vueuse/core'
 
 
-const wsUrl = 'ws://localhost:3000/api/admin/dashboard/d-data'
+const wsUrl = 'ws://localhost:3000/api/admin/dashboard/_ws'
 
 const { status, data, send, open, close } = useWebSocket(wsUrl)
 

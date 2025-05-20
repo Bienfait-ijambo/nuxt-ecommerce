@@ -110,3 +110,34 @@ onMounted(() => {
     </div>
   </div>
 </template>
+
+
+
+Hello, this is Ben, in this video we gonna build & deploy a real-time
+ecommerce app, our app has two side client side and .
+
+Before a given user access, his account first he has to create to create an account by providing his name,email and password then we gonna send him and email verification, we use mailtrap for testing, on he received the code can pass it to otp input and then access his account.
+
+on the admin side we have the dashboard page where we can see analytics about sales in real-Time, know the total amount gain daily by walking through the chart.  
+
+eg:If we make a payment we are going to update the dashboard data in real-time
+
+we have categories page(create category) and  the product page where we can create product,add,delete,edit, add images for a product. moreover we gonna learn how to implement pagination
+
+payment page to see all completed payment
+
+user-page to view -all created user
+
+now let's move to the client side, here the client can browser all products, filter by category,color,star-rating, once he likes a product can see details about or provide a review about a product.
+
+And also he can see product that belongs to the same category. then he can pick a product and add it to cart, update quantity. move to the checkout page to process payment.
+once payment pass we can gonna receive a payment into stripe dashboard.
+
+TECH STACK
+---------
+
+now to develop this app we gonna use....prisma...
+
+now guys let's have a look to our ecommerce website page stripe. present db-structure,prerequisites. 
+
+gooooo.

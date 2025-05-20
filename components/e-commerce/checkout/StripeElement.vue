@@ -30,7 +30,7 @@ async function createPayment() {
   isLoading.value = true;
 
   const { clientSecret, error, message } = await $fetch(
-    "/api/e-commerce/payment/create-payment",
+    "/api/payment/create-payment",
     {
       method: "post",
       body: JSON.stringify({
