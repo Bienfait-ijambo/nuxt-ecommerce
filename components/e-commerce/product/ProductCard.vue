@@ -14,7 +14,7 @@ const FALL_BACK_IMG_URL=config?.public?.FALL_BACK_IMG_URL
 <template>
   <div class="relative group" v-for="product in productData?.products" :key="product?.id">
     <NuxtLink :to="`/product/${product?.slug}`" :title="product?.name">
-      <SaleBadge  class="absolute top-2 right-2" />
+      <!-- <SaleBadge  class="absolute top-2 right-2" /> -->
       <NuxtImg
       
         :width="imgWidth"

@@ -1,6 +1,12 @@
 <script setup>
+
 const userCookie = useCookie('user', userCookieSettings);
 const userEmail=ref(userCookie.value?.data?.user?.email)
+const userId=userCookie.value?.data?.user?.id
+
+const checkoutStore=useCheckoutStore()
+const {customerOderData}=storeToRefs(checkoutStore)
+await checkoutStore.fetchCustomerOder(userId)
 </script>
 
 <template>
@@ -14,10 +20,7 @@ const userEmail=ref(userCookie.value?.data?.user?.email)
           <h2 class="w-full mb-2 text-2xl font-semibold leading-none">
             Contact Information
           </h2>
-          <p class="mt-1 text-sm text-gray-500">
-            Already have an account?
-            <a href="/auth/signin" class="text-primary text-semibold">Log in</a>.
-          </p>
+          
           <div class="w-full mt-4">
             <label for="email">E-mail</label>
             <input
@@ -39,7 +42,9 @@ const userEmail=ref(userCookie.value?.data?.user?.email)
         </div>
 
         <StripeElement />
-        <!-- Order note -->
+        
+   <CustomerOrder :userOders="customerOderData?.userOders"/>
+        
       </div>
 
       <OrderSummary>

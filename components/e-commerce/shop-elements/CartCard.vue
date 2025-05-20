@@ -4,9 +4,6 @@ const props=defineProps(['products'])
 
 const config=useRuntimeConfig()
 const shoppingCartStore=useShoppingCartStore()
-// const {shoppingCartData}=storeToRefs(shoppingCartStore)
-
-
 
 const FALL_BACK_IMG_URL=config?.public?.FALL_BACK_IMG_URL
 

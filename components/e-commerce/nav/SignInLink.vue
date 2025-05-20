@@ -22,7 +22,7 @@
           height="22"
           :alt="'link-title'" />
         <div class="account-dropdown">
-          <NuxtLink :to="'/'" class="hover:bg-gray-100"><Icon name="ion:heart-outline" size="16" /><span>Wishlist</span></NuxtLink>
+
           <NuxtLink to="/checkout" class="hover:bg-gray-100"><Icon name="ion:person-outline" size="16" /><span>My Account</span></NuxtLink>
           <button @click=$logout() class="text-red-600 hover:bg-red-50" >
           

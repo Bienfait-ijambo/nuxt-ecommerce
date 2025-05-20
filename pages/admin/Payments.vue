@@ -4,10 +4,16 @@
 definePageMeta({
     layout:'admin'
 })
+
+const checkoutStore=useCheckoutStore()
+const {paymentData}=storeToRefs(checkoutStore)
+await checkoutStore.fetchPaymentData()
 </script>
-<template>
-    <div class="bg-slate-200 h-screen">
-   payments
-    </div>
-  </template>
-  
+
+ <template>
+  <div class="h-screen">
+   
+    <CustomerOrder :userOders="paymentData?.userOrders"/>
+  </div>
+
+</template>

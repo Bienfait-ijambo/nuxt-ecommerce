@@ -10,14 +10,9 @@ const {showCart}=storeToRefs(shoppingCartStore)
     <Filters />
      <Cart v-show="showCart"/>
    
-
-
-
     <div class="w-full">
       <div class="flex items-center justify-between w-full gap-4 mt-8 md:gap-8">
-        <!-- <ProductResultCount /> -->
-        <!-- <OrderByDropdown class="hidden md:inline-flex" v-if="storeSettings.showOrderByDropdown" /> -->
-        <!-- <ShowFilterTrigger v-if="storeSettings.showFilters" class="md:hidden" /> -->
+      
       </div>
       <ProductGrid />
     </div>

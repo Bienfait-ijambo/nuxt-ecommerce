@@ -2,6 +2,11 @@
 export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
+  nitro: {
+    experimental: {
+      websocket: true
+    }
+  },
 
   components: [
     {
@@ -31,8 +36,8 @@ export default defineNuxtConfig({
     DATABASE_URL: process.env.DATABASE_URL,
     public: {
       // public:is accessible on server and client
-      FALL_BACK_IMG_URL:process.env.FALL_BACK_IMG_URL,
-      DEFAULT_USER_AVATAR:process.env.DEFAULT_USER_AVATAR
+      FALL_BACK_IMG_URL: process.env.FALL_BACK_IMG_URL,
+      DEFAULT_USER_AVATAR: process.env.DEFAULT_USER_AVATAR
 
     },
 
@@ -40,18 +45,16 @@ export default defineNuxtConfig({
   pinia: {
     storesDirs: ['./stores/**']
   },
-  
+
   image: {
     // Options
   },
   icon: {
     mode: 'css',
     cssLayer: 'base',
-    
+
   },
-  // app: {
-  //   pageTransition: { name: 'page', mode: 'out-in' }
-  // },
+
 
   tailwindcss: { exposeConfig: true },
   modules: [
@@ -63,12 +66,12 @@ export default defineNuxtConfig({
     '@nuxt/icon',
     '@unlok-co/nuxt-stripe'
   ],
-   stripe: {
+  stripe: {
     // Server
     server: {
       key: process.env.STRIPE_SECRET_KEY,
       options: {
-        
+
       },
     },
     client: {
