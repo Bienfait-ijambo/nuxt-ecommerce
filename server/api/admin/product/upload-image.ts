@@ -4,7 +4,7 @@
 import multer from 'multer'
 import path from 'path'
 import fs from 'fs'
-import prisma from "~/utils/script.prisma";
+import prisma from "~/lib/prisma";
 import { withAuth } from '~/utils/withAuth';
 import { authGuard } from '~/middleware/authGuard';
 

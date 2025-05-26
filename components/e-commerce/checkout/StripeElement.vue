@@ -3,11 +3,10 @@ import { ref, onMounted } from "vue";
 
 import { useWebSocket } from '@vueuse/core'
 
+
+
 const wsUrl = 'ws://localhost:3000/api/admin/dashboard/_ws'
-const { status, data, send, open, close } = useWebSocket(wsUrl)
-
-
-
+const { status, data:wsData, send, open, close } = useWebSocket(wsUrl)
 
 const { stripe } = useClientStripe();
 
@@ -62,10 +61,10 @@ async function createPayment() {
   if (confirmError) {
     console.error("Payment failed:", confirmError.message);
   } else {
+     send('success-payment')
     shoppingCartStore.clearOutCart();
     successMsg(message);
-    send("success-payment")
-    console.log("Payment successful:", paymentIntent);
+   
   }
 
   isLoading.value = false;

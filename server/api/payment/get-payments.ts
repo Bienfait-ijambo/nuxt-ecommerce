@@ -1,4 +1,4 @@
-import prisma from "~/utils/script.prisma";
+import prisma from "~/lib/prisma";
 import { validateUserIdSchema } from "./modules/validatePaymentInput";
 
 export default defineEventHandler(async (event) => {

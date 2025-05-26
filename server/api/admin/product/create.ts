@@ -1,7 +1,7 @@
-import prisma from "~/utils/script.prisma";
+import prisma from "~/lib/prisma";
 import { productSchema } from "./modules/validateProduct";
 import { withAuth } from "~/utils/withAuth";
-import slugify from 'slugify'
+import { generateSlug } from "./modules/slugifyProductName";
 
 export default withAuth(async (event) => {
     
@@ -22,7 +22,7 @@ export default withAuth(async (event) => {
     const product = await prisma.product.create({
         data: {
             name:name,
-            slug:slugify(name),
+            slug:generateSlug(name),
             color:color,
             categoryId:categoryId,
             price:price.toString()

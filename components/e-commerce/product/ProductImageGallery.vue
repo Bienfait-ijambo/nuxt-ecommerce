@@ -6,7 +6,7 @@ const props=defineProps(['images'])
 
 const imgWidth = 540;
 
-const mainImgUrl=ref(props.images.length >0 ?props.images[0]?.url : FALL_BACK_IMG_UR)
+const mainImgUrl=ref(props?.images?.length >0 ?props?.images[0]?.url : FALL_BACK_IMG_URL)
 
 function selectImage(imageUrl){
 

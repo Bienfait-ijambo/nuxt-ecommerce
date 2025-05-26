@@ -28,7 +28,7 @@ const checkboxChanged = (categoryId) => {
 </script>
 
 <template>
-  <div v-if="categories.length">
+  <div v-if="categories?.length">
     <div
       class="cursor-pointer flex font-semibold mt-8 justify-between items-center"
       @click="isOpen = !isOpen"
@@ -67,7 +67,7 @@ const checkboxChanged = (categoryId) => {
             v-if="showCount"
             class="ml-1 text-gray-400 tabular-nums"
             aria-hidden="true"
-            >({{ categories.length || 0 }})</small
+            >({{ categories?.length || 0 }})</small
           >
         </label>
       </div>

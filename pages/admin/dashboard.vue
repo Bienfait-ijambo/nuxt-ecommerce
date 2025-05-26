@@ -3,21 +3,20 @@
 <script setup>
 import { onMounted, ref } from 'vue'
 import { Chart, registerables } from 'chart.js'
-
 import { useWebSocket } from '@vueuse/core'
 
 Chart.register(...registerables)
 definePageMeta({ layout: 'admin' })
 
 
-const wsUrl = 'ws://localhost:3000/api/admin/dashboard/_ws'
-const { status, data:wsData, send, open, close } = useWebSocket(wsUrl)
 const loading=ref(false)
 
 const dashboardData=ref(null)
 const { data, refresh } = await useFetch("/api/admin/dashboard/dashboard-data");
 dashboardData.value = data.value
 
+const wsUrl = 'ws://localhost:3000/api/admin/dashboard/_ws'
+const { status, data:wsData, send, open, close } = useWebSocket(wsUrl)
 
 watch(wsData, (newValue) => {
   loading.value=true
@@ -27,6 +26,10 @@ watch(wsData, (newValue) => {
     loading.value=false
   },2000)
 })
+
+
+
+
 
 const chartRef = ref(null)
 const chartInstance = ref(null)

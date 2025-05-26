@@ -1,8 +1,8 @@
-import prisma from "~/utils/script.prisma";
+import prisma from "~/lib/prisma";
 import { comparePassword, hashPassword } from "./modules/bcrypt";
 import { signInSchema } from "./modules/validateUser";
 import { USER_EMAIL_TYPE } from "./modules/user.constant";
-import { signAccessToken, signRefreshToken } from "./modules/jwtToken";
+import { signAccessToken, signRefreshToken } from "../../../utils/jwtToken";
 export default defineEventHandler(async (event) => {
 
     const { email, password } = await readBody(event)

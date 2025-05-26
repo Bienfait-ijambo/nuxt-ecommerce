@@ -3,6 +3,9 @@ export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
   nitro: {
+    replace: {
+      'import * as process': 'import * as processUnused',
+    },
     experimental: {
       websocket: true
     }
@@ -59,7 +62,7 @@ export default defineNuxtConfig({
   tailwindcss: { exposeConfig: true },
   modules: [
     '@nuxtjs/tailwindcss',
-    "@prisma/nuxt",
+    // "@prisma/nuxt",
     '@pinia/nuxt',
     'nuxt-nodemailer',
     '@nuxt/image',

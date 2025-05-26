@@ -1,5 +1,5 @@
 import { useServerStripe } from "#stripe/server";
-import prisma from "~/utils/script.prisma";
+import prisma from "~/lib/prisma";
 
 export default defineEventHandler(async (event) => {
 

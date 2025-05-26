@@ -12,7 +12,7 @@ function updateInput(event) {
   <input
   @input="updateInput"
     :value="modelValue"
-    :type="typeof type === 'undefined' ? type : 'text'"
+    :type="typeof type !== 'undefined' ? type : 'text'"
     name=""
     :placeholder="placeholder"
     id=""

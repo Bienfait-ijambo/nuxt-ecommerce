@@ -1,4 +1,4 @@
-import prisma from "~/utils/script.prisma";
+import prisma from "~/lib/prisma";
 import { USER_EMAIL_TYPE } from "./modules/user.constant";
 export default defineEventHandler(async (event) => {
     

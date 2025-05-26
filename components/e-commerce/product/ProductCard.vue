@@ -19,7 +19,7 @@ const FALL_BACK_IMG_URL=config?.public?.FALL_BACK_IMG_URL
       
         :width="imgWidth"
         :height="imgHeight"
-        :src="product?.images.length >0?product?.images[0]?.url:FALL_BACK_IMG_URL"
+        :src="product?.images?.length >0?product?.images[0]?.url:FALL_BACK_IMG_URL"
         :alt="product?.name"
         :title="product?.name"
         

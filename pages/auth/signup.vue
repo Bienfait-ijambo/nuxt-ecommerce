@@ -55,7 +55,7 @@ async function submitInput() {
             <BaseInput
               v-model="registerInput.name"
               :type="'text'"
-              :placeholder="''"
+              :placeholder="'name'"
             />
           </FormError>
         

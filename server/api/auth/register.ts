@@ -1,4 +1,4 @@
-import prisma from "~/utils/script.prisma";
+import prisma from "~/lib/prisma";
 import { hashPassword } from "./modules/bcrypt";
 import { signupSchema } from "./modules/validateUser";
 import { generateOTP } from "./modules/generateOtpCode";

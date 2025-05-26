@@ -1,10 +1,17 @@
-import prisma from "~/utils/script.prisma";
+import prisma from "~/lib/prisma";
 import { withAuth } from "~/utils/withAuth";
 
 export default defineEventHandler(async (event) => {
    
-    const categories = await prisma.category.findMany()
-
+   try {
+     const categories = await prisma.category.findMany()
 
     return {  categories };
+    
+   } catch (error) {
+    throw createError({
+        statusCode:500,
+        statusMessage:"Server error"
+    })
+   }
 })

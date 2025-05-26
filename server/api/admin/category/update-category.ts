@@ -1,4 +1,4 @@
-import prisma from "~/utils/script.prisma";
+import prisma from "~/lib/prisma";
 import { categorySchema } from "./modules/validateCategory";
 import { withAuth } from "~/utils/withAuth";
 
